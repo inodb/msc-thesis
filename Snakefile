@@ -1,4 +1,4 @@
-DOCUMENTS = ['pre-report']
+DOCUMENTS = ['report']
 TEXS = [doc+".tex" for doc in DOCUMENTS]
 PDFS = [doc+".pdf" for doc in DOCUMENTS]
 #FIGURES = ['fig1.pdf']
