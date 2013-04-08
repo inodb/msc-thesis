@@ -1,0 +1,76 @@
+digraph assembly_approaches {
+//  rankdir=LR
+    // Input (box)
+    subgraph cluster_reads {
+        label="Input reads"
+        illumina_pe [shape = box];
+    }
+    subgraph cluster_process_reads {
+        label="Process reads"
+        illumina_pe -> quality_trim;
+        quality_trim [shape = diamond];
+        processed_reads [shape = box];
+        quality_trim -> processed_reads;
+    }
+    // Programs (diamonds)
+    subgraph cluster_de_bruijn {
+        label="De Bruijn Graph"
+        velvet [shape = diamond];
+        ray [shape = diamond];
+        velvet -> meta_velvet;
+        meta_velvet [shape = diamond];
+        // de bruijn specific output
+        subgraph cluster_de_bruijn_output {
+            label="Output";
+            contigs_single_kmer [shape = box];
+            scaffolds_single_kmer [shape = box];
+        }
+    }
+    subgraph cluster_merging {
+        label="Merging contigs";
+        newbler2 [label="newbler" shape=diamond];
+        cd_hit [shape = diamond];
+        minimus2 [shape = diamond];
+        merged_contigs [shape = box];
+    }
+    subgraph cluster_scaffold {
+        label="Scaffolding"
+        bwa [shape = diamond];
+        contigs_with_linkage_info [shape = box];
+        bambus2 [shape = diamond];
+        scaffolds [shape = box];
+    }
+
+    // newbler
+    contigs_single_kmer -> newbler2;
+    newbler2 -> merged_contigs;
+
+    // velvet
+    processed_reads -> velvet;
+    velvet -> contigs_single_kmer;
+    velvet -> scaffolds_single_kmer;
+
+    // Ray
+    processed_reads -> ray;
+    ray -> contigs_single_kmer;
+    ray -> scaffolds_single_kmer;
+
+    // meta_velvet
+    meta_velvet -> contigs_single_kmer;
+    meta_velvet -> scaffolds_single_kmer;
+
+    // minimus2 
+    contigs_single_kmer -> cd_hit;
+    cd_hit -> minimus2;
+    minimus2 -> merged_contigs;
+
+    // bwa
+    contigs_single_kmer -> bwa;
+    merged_contigs -> bwa;
+    processed_reads -> bwa;
+    bwa -> contigs_with_linkage_info;
+
+    // bambus2
+    contigs_with_linkage_info -> bambus2;
+    bambus2 -> scaffolds;
+}
