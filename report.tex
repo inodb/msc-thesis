@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,12pt]{report}
 \usepackage[english]{babel}
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -11,13 +11,15 @@
 \usepackage{subfig}
 \usepackage{url}
 \begin{document}
-\title{MSc Thesis - Benchmark of {\em De Novo} Short Read Assembly Strategies
-for Metagenomics}
+\title{MSc Thesis - Benchmark of {\em De Novo} Short Read Assembly Strategies for Metagenomics}
 \author{Ino de Bruijn\\ {\bf Supervisor:} Assistant Prof. Anders Andersson}
 
 \maketitle
 
-\section{Introduction}
+\tableofcontents
+
+\chapter{Introduction}
+% random comment
 Metagenomics, the sequencing of environmental DNA, has demonstrated to be a
 promising approach for the discovery and investigation of microbes that cannot
 be cultured in the laboratory \cite{Eisen17355177} as well as for the study of
@@ -46,30 +48,56 @@ the reads, a process called binning is performed, where the resulting scaffolds
 and contigs are assigned to phylogenetically related groups. Finally, gene
 calling and functional annotations are performed on the scaffolds.\\
 
+% rewrite upper part (maybe take some parts from theoretical background)
 
 In our studies several strategies for {\em de novo} assembly of metagenomics
-have been evaluated.  Illumina short read libraries have {\em in silico } been shown
-to work well on communities of medium complexity \cite{Mende22384016},
+have been evaluated. Illumina short read libraries have {\em in silico} been
+shown to work well on communities of medium complexity \cite{Mende22384016},
 therefore we have chosen to assess the assembly strategies for Illumina paired
-short reads sepecifically. In previous studies mostly {\em in silico } metagenomic
-data sets have been used \cite{Pignatelli21625384,Mavromatis17468765}. In
-contrast the community of our study is an {\em in vitro } simulated metagenome
-consisting of 59 species with completed or nearly completed genomes so the
-quality of our assesment is not dependent on the realisticness of read
-simulators. An even and uneven distribution of the 59 species were created in
-vitro. The community has been sequenced with different type of library
-preparations to be able to test the difference in library preparation as well.
-The following assembly programs have been tested: Velvet
-\cite{Zerbino18349386}, Meta-Velvet \cite{MetaVelvet}, Newbler
-\cite{Quinn18755037}, Minimus2 \cite{Sommer17324286}, Bambus2
-\cite{Koren21926123}. The quality of the assemblies have been evaluated by
-mapping the constructed contigs or scaffolds to the collection of reference
-genomes, hereafter referred to as the reference metagenome. In addition two
-pipelines have been constructed, one to perform the assemblies and another to
-perform the validation given there is a reference metagenome available.
+short reads sepecifically. In previous studies mostly {\em in silico}
+metagenomic data sets have been used
+\cite{Pignatelli21625384,Mavromatis17468765}. In contrast the community of our
+study is an {\em in vitro} simulated metagenome consisting of 59 species with
+completed or nearly completed genomes so the quality of our assesment is not
+dependent on the realisticness of read simulators. An even and uneven
+distribution of the 59 species were created in vitro. The community has been
+sequenced with different type of library preparations to be able to test the
+difference in library preparation as well.  The following assembly programs
+have been tested: Velvet \cite{Zerbino18349386}, Meta-Velvet \cite{MetaVelvet},
+Newbler \cite{Quinn18755037}, Minimus2 \cite{Sommer17324286}, Ray Meta
+\cite{Boisvert23259615} and Bambus2 \cite{Koren21926123}. The quality of the
+assemblies have been evaluated by mapping the constructed contigs or scaffolds
+to the collection of reference genomes, hereafter referred to as the reference
+metagenome. In addition two pipelines have been constructed, one to perform the
+assemblies and another to perform the validation given there is a reference
+metagenome available.
 
-\section{Related work}
-% maybe mention some general paper overview of different assembly methods PRactical ZHang de novo genome assembly).
+%\chapter{Theoretical Background}
+%% maybe mention some general paper overview of different assembly methods
+%% PRactical ZHang de novo genome assembly).
+%%Studying microbes in their natural environment is difficult for a number of reasons. One obvious
+%%reason is that their size makes field studies impractical. A way around this
+%%issue is culturing microbes in the laboratory. Unfortunately the vast majority of
+%%microbes have not successfully been cultured in the lab \cite{Eisen17355177}.
+%%By isolating the DNA of a community and sequencing that, analysis of a
+%%community $in vivo$ can be performed. The most popular methods for sequencing
+%%DNA from a sample of microbes are Illumina paired end and 454 sequencing (TODO:
+%%citations). The sequencing process results in short reads of around 100 bp for
+%%Illumina HiSeq and around 400 bp up to 1 kbp for 454 GS FLX Titanium (TODO:
+%%citations). After sequencing the reads can be mapped against a reference
+%%database of the same or closely related organisms to get a functional profile
+%%of the community. Assembling the reads into longer contiguous segments of DNA
+%%(contigs) before functional analysis has however been shown to improve the
+%%accuracy (TODO: citations). 
+%
+%
+%There are mainly three different categories of assembly approaches:
+%Greedy-extension, de Bruijn graph and Overlap-Layout-Consensus (OLC)
+%\cite{Zhangdadad}. Greedy-extension is a string-based method and the latter two
+%use graphs.
+
+\chapter{Related Work}
+% Start with success of single genome evaluation, continue to metagenomic
 
 In a study by \citet{Mavromatis17468765} three genome assemblers were
 evaluated: Phrap \cite{delaBastide18428783}, Arachne \cite{Batzoglou11779843}
@@ -82,7 +110,7 @@ all. Resulting contigs were evaluated on chimericity and length distribution.
 Compared to using the original reads for gene annotation, assembly was
 demonstrated to give not more than 20\% increase in accurate gene prediction
 and a slightly better increase for inaccurate and missed genes, however 700 bp
-long Sanger reads were used in this study.  This approach of using artificial
+long Sanger reads were used in this study. This approach of using artificial
 communities has subsequently been used in adapted versions by several other
 assembly evaluation papers \cite{Pignatelli21625384,Mende22384016}. In the
 benchmark by \citet{Pignatelli21625384} the reads of the artificial communities
@@ -104,47 +132,52 @@ of \citet{Pignatelli21625384} a year earlier, contigs now did turn out to
 improve functional annotation of the metagenome. Furthermore using Illumina
 paired end data to determine contig links and construct scaffolds, although
 introducing more chimerism, resulted in an even better functional annotation.
-Beyond using simulated reads or real reads of {\em in silico } communities
-there has not been a comparison of assembly algorithms using an {\em in vitro }
+Beyond using simulated reads or real reads of {\em in silico} communities
+there has not been a comparison of assembly algorithms using an {\em in vitro}
 community yet.  In vitro communities have been used previously with success to
 assess DNA extraction techniques for sequencing a low complexity community of
 nine bacterial genera \cite{Willner22514642}, an oral community
 \cite{Diaz22520388}, the human gut \cite{Wu20673359} and the human microbiome
-\cite{HMPC22699610}.  The advantage of using an {\em in vitro } community for
+\cite{HMPC22699610}.  The advantage of using an {\em in vitro} community for
 assembly evaluation is that one does not have to rely on the correctness of
 sequencing simulators, the assessment can thus be as good as the similarity of
 the {\em in vitro } community to a real community.
 
-\section{Methods} To determine the quality of metagenomic assembly a mock
+%Say something about GAGE and Assemblathon
+
+\chapter{Methods and Materials} To determine the quality of metagenomic assembly a mock
 community of species with known genomes was constructed {\em in vitro} and
 sequenced with Illumina. The resulting reads have been assembled using a
-combination of Velvet, Meta-Velvet, Minimus2, Newbler and Bambus2 resulting in
-twelve different assembly strategies (see Figure \ref{fig:asmstrat} and Table
+combination of Velvet, Meta-Velvet, Ray, Minimus2, Newbler and Bambus2 resulting in
+nineteen different assembly strategies (see Figure \ref{fig:asmstrat} and Table
 \ref{tab:asmstrat}). The strategies stem from current literature and our own
 ideas.
 
-\subsection{Mock community} The mock community consists of 49 bacterial and 10
+\section{Mock community} The mock community consists of 49 bacterial and 10
 archaeal species with finished or nearly completed genomes (Table
-\ref{tab:mock}). The abundances of DNA from each species have been fixed in two
-types of configurations before sequencing. In the first configuration, the even
-configuration, all species have approximately equal genome copy numbers. In the
-second configuration, the uneven configuration, the phyla are mixed in
-proportions similar to log-normal distributions of phyla in soil \cite{Doroghazi18682841}. The samples
-have been prepared with the Nextera 50ng sample preparation kit. The entire
-reference metagenome's size is about 195Mb.
+\ref{tab:mock}). The species have been chosen such that there are a number of
+closely related organisms and more distant ones. The number of species is about
+equal to the number of species one would find in the human gut. The abundances
+of DNA from each species have been fixed in two types of configurations before
+sequencing. In the first configuration, the even configuration, all species
+have approximately equal genome copy numbers. In the second configuration, the
+uneven configuration, the phyla are mixed in proportions similar to log-normal
+distributions of phyla in soil \cite{Doroghazi18682841}. The samples have been
+prepared with the Nextera 50ng sample preparation kit. The entire reference
+metagenome's size is about 195Mb. 
 
 % The V3 (192 bp) and V4 (291 bp) of the 16S genes have been amplified and the samples have been sequenced with Illumina.
 
-\subsection{Quality trimming} Before assembling the reads one often starts with
+\section{Quality trimming} Before assembling the reads one often starts with
 pre-processing them by quality trimming and/or removing PCR duplicates.
 \citet{Mende22384016} demonstrated that quality trimming could drastically
 improve the assembly. Before each assembly the same quality trimming procedure
-has been performed. The quality trimming script used was a script by Nik Joshi
-of the UC Davis Genome Center (see Table \ref{tab:programversions}).  Reads
-were trimmed from the 3' end if the average quality score was below 20 in a
-window of 10 bases.
+has been performed. For quality trimming the program sickle was used (see Table
+\ref{tab:programversions}). Reads were trimmed from the 3' end if the average
+quality score was below 20 in a window of 10 bases.
 
-\subsection{Assembly} In the assembly procedure reads are combined into
+
+\section{Assembly} In the assembly procedure reads are combined into
 contiguous sequences called contigs. Contigs can afterwards be joined using
 paired read information into longer scaffolds. In the scaffolding process
 contigs might be extended and repeats might be solved so scaffolding is not
@@ -155,36 +188,67 @@ There are a plethora of different assemblers available and by pre-processing
 reads and combining different assemblers an even larger amount of assembly
 strategies is possible. Velvet is one of the most used assembly programs and
 was therefore included in this assessment. Velvet's metagenomic counterpart,
-Meta-Velvet, is performed after executing Velvet so it is possible to
-determine how the metagenomic specific parameters improve the assembly. Velvet
-uses a de Bruijn graph to determine overlaps between reads. This involves
-cutting up the reads in sizes of a specified kmer size and let edges represent
-overlaps between kmers. This way the graph, or the computational requirements,
-grow with the number of unique kmers in the library instead of the number of
-reads. For a more elaborate description of de Bruijn Graphs for sequence
-assembly see \cite{Miller20211242}. The resulting contigs are constructed by
-following paths in the graph. The paths that can be unambiguously followed are
-called unitigs. Ambiguous paths can be solved by using coverage information or
-paired-end information. Contigs thus consist of one or multiple unitigs.
-Choosing the right kmer size is important. A shorter $k$ gives more coverage
-but at the same time the risk increases that the kmer occurs multiple times
-within the genome, or in multiple genomes. A larger $k$ can overcome this
-problem if it is larger than the multiply occurring region, thereby creating
-unique kmers instead of one kmer with more coverage. A way to get the advantage
-from both short and long kmers is by merging contigs generated in multiple
-assemblies with different kmer lengths. This is possible with Newbler, as done
-by \citet{Luo22347999}, or with Minimus2, as done by for instance the Rnnotator
-pipeline \cite{Martin21106091}. Both Newbler and Minimus2 use an
-Overlap-Layout-Consensus method to merge contigs
-\cite{Sommer17324286,Miller20211242}. For the scaffolding procedure Bambus2 was
-chosen since it was one of the better scaffolders for single genomes in the
-GAGE assessment paper \cite{Salzberg22147368} and is suitable for metagenomes
-as well \cite{Koren21926123}. For a flow diagram of previously mentioned
-approaches see Figure \ref{fig:asmstrat}. A total of twelve assembly strategies
-from the flow diagram have been tested. See Table \ref{tab:asmstrat} for an
-overview of the assembly strategies, Table \ref{tab:programversions} for
-versions of each program and Table \ref{tab:asmstratparameters} for the
-parameters of each strategy.
+Meta-Velvet, is performed after executing Velvet so it is possible to determine
+how the metagenomic specific parameters improve the assembly. Another popular
+assembler that has recently received an update for metagenomics is Ray (TODO:
+cite). Ray is based on MPI and is runnable over multiple nodes distributing
+both memory and processor load, which makes it an ideal candidate for large
+metagenomic projects.\\
+
+
+\subsection{Contiging}
+Velvet, Ray and Meta-Velvet all use a de Bruijn graph to determine overlaps
+between reads. This involves cutting up the reads in sizes of a specified kmer
+size and let edges represent overlaps between kmers. This way the graph, or the
+computational requirements, grow with the number of unique kmers in the library
+instead of the number of reads. For a more elaborate description of de Bruijn
+Graphs for sequence assembly see \cite{Miller20211242}. The resulting contigs
+are constructed by following paths in the graph. The paths that can be
+unambiguously followed are called unitigs. Ambiguous paths can be solved by
+using coverage information or paired-end information. Contigs thus consist of
+one or multiple unitigs. Choosing the right kmer size is important. A shorter
+$k$ gives more coverage but at the same time the risk increases that the kmer
+occurs multiple times within the genome, or in multiple genomes. A larger $k$
+can overcome this problem if it is larger than the multiply occurring region,
+thereby creating unique kmers instead of one kmer with more coverage.\\
+
+
+\subsubsection{How the assemblers differ}
+Velvet, Ray and Meta-Velvet differ in the way the graph is traversed. Velvet,
+meant for single genomes, looks for one coverage peak in the coverage
+distribution and tries to follow that, where the main idea is that the genome
+is approximately uniformly covered. Nodes in the graph below a certain coverage
+threshold are considered errors and ones with high coverage repeats.
+Meta-Velvet looks for multiple peaks in the coverage distribution. Each genome
+should have a distinct coverage peak due to its genome copy number and genome
+length being different from the other genomes in the metagenome. Meta-Velvet
+makes use of that property. Ray looks for 'seeds' in the graph and extends
+those seeds iteratively weighting choises by the number of reads supporting a
+certain path. The seeds are unitigs in the graph with a specific coverage. The
+metagenomic update to Ray changes the seed selection by looking at the coverage
+peak in the graph locally instead of globally. 
+
+
+\subsection{Merging}
+A way to get the advantage from both short and long kmers is by merging contigs
+generated in multiple assemblies with different kmer lengths. This is possible
+with Newbler, as done by \citet{Luo22347999}, or with Minimus2, as done by for
+instance the Rnnotator pipeline \cite{Martin21106091}. Both Newbler and
+Minimus2 use an Overlap-Layout-Consensus method to merge contigs
+\cite{Sommer17324286,Miller20211242}.
+
+
+\subsection{Scaffolding}
+For the scaffolding procedure Bambus2 was chosen since it was one of the better
+scaffolders for single genomes in the GAGE assessment paper
+\cite{Salzberg22147368} and is suitable for metagenomes as well
+\cite{Koren21926123}. For a flow diagram of previously mentioned approaches see
+Figure \ref{fig:asmstrat}. A total of twelve assembly strategies from the flow
+diagram have been tested. See Table \ref{tab:asmstrat} for an overview of the
+assembly strategies, Table \ref{tab:programversions} for versions of each
+program and Table \ref{tab:asmstratparameters} for the parameters of each
+strategy.
+
 
 \begin{table}[h!]
 \centering
@@ -206,6 +270,10 @@ newblermetavelvetnoscaf & Meta-Velvet & Newbler & -\\
 bambus2metavelvetnoscaf & Meta-Velvet & - & Bambus2\\
 bambus2minimus2metavelvetnoscaf & Meta-Velvet & Minimus2 & Bambus2\\
 bambus2newblermetavelvetnoscaf & Meta-Velvet & Newbler & Bambus2\\
+raynoscaf & Ray & - & -\\
+rayscaf & Ray & - & Ray\\
+minimus2raynoscaf & Ray & Minimus2 & -\\
+newblerraynoscaf & Ray & Newbler & -\\
 \hline
 \end{tabular}
 \caption{Assembly strategies}
@@ -217,14 +285,14 @@ bambus2newblermetavelvetnoscaf & Meta-Velvet & Newbler & Bambus2\\
 \begin{figure}[ht!]
   \centering
     \includegraphics[height=\textheight]{figures/metassemble-flowchart.pdf}
-  \caption{Assembly strategies using a combination of Velvet, Meta-Velvet, Minimus2, Newbler and Bambus2.}
+  \caption{Assembly strategies using a combination of Velvet, Meta-Velvet, Ray, Minimus2, Newbler and Bambus2.}
   \label{fig:asmstrat}
 \end{figure}
 
 %TODO Validation requires some more non-ambiguous parameters for calculating
 % the statistics and performing the mapping with MUMmer
 
-\clearpage \subsection{Validation} \label{sec:metval} The validation of a metagenomic assembly in
+\clearpage \section{Validation} \label{sec:metval} The validation of a metagenomic assembly in
 case a reference metagenome is available often focuses on one or more of the
 following points:
 \begin{itemize}
@@ -320,17 +388,18 @@ specific assembly can be performed. It is also possible to only get the
 commands for a specific assembly by doing a dry-run so one can easily create
 their own scripts.
 
-\section{Preliminary Results}
+\chapter{Results}
 All assemblies in Table \ref{tab:asmstrat} have been performed on the
 following libraries:
 \begin{description}
 \item[50ng even] Community prepared with 50 ng Nextera library prepartion kit and equal
-genome copy numbers. The library has been sequenced with Illumina and contains $\sim$1M paired reads, each single read has a length of 100.
+genome copy numbers. The library has been sequenced with Illumina and contains
+$\sim$10M paired reads, each single read has a length of 100.
 %\item[500pg even] Community prepared with 500 pg Nextera library prepartion kit and equal
 %genome copy numbers.
 \item[50ng uneven] Community prepared with 50 ng Nextera library prepartion kit
 and phyla mixed similar to log-normal distributions of phyla in soil. The
-library has been sequenced with Illumina and contains $\sim$1M paired reads,
+library has been sequenced with Illumina and contains $\sim$10M paired reads,
 each single read has a length of 100.
 %\item[500pg uneven] Community prepared with 500 pg Nextera library prepartion kit and phyla
 %mixed similar to log-normal distributions of phyla in soil.
@@ -388,7 +457,7 @@ different kmers into one, Newbler outperforms Minimus2 both on purity and on
 L50. An even greater L50 length can be acquired by scaffolding afterwards with
 Bambus2, which performs exceptionally well. The best assemblies are
 acquired by merging Meta-Velvet assemblies with Minimus or Newbler and
-scaffolding them with Bambus2. Scaffolding of Meta-Velvet is a significantly
+scaffolding them with Bambus2. Scaffolding of Meta-Velvet is significantly
 worse performing on purity than Bambus2. For the uneven community, the best
 assemblies are done by a combination of Meta-Velvet and Bambus2. Merging
 contigs before scaffolding is disadvantageous in this case. The distribution of
@@ -410,12 +479,18 @@ but no explanation for the cause of this behaviour has been found.
 \end{figure}
 
 
+\chapter{Discussion}
+Discuss.
+%Low coverage libraries
+%Future work from presentation
+
 \clearpage
-%\bibliographystyle{pre-report.bst}
+%\bibliographystyle{report.bst}
 \bibliographystyle{plainnat}
-\bibliography{pre-report}
+\bibliography{report}
 
 % Supplementary section
+\appendix
 \clearpage
 \pagestyle{empty}
 \begin{landscape}
@@ -424,17 +499,18 @@ but no explanation for the cause of this behaviour has been found.
 \begin{tabular}{|l|r|p{10cm}|}
 \hline
 Program & Version & URL \\ \hline
-Trim.pl & September 2010 & \url{http://wiki.bioinformatics.ucdavis.edu/index.php/Trim.pl} \\ \hline
+sickle & commit 2013-4-3 e435598aa6bbb74b3254d2884a9dea1b0639d464 & \url{https://github.com/najoshi/sickle} \\ \hline
 Velvet & 1.2.01 & \url{https://github.com/dzerbino/velvet/commit/5d5b636c52e94fde745cb8bf753ffa134126e04d} \\ \hline
 Meta-Velvet & 1.2.01 &  \\ \hline
 Minimus2 & Amos commit 2012-3-6 & \url{http://amos.git.sourceforge.net/git/gitweb.cgi?p=amos/amos;a=commit;h=7c70d6c36dba244ae0b266fc52a5206ab202a36c} \\ \hline
 Newbler & RunAssembly 2.6 (20110517\_1502) &  \\ \hline
 MUMmer & 3.23 & \url{http://sourceforge.net/projects/mummer/files/mummer/3.23/MUMmer3.23.tar.gz/download} \\ \hline
-Bambus2 & Amos commit 2012-3-6 & \url{http://amos.git.sourceforge.net/git/gitweb.cgi?p=amos/amos;a=commit;h=7c70d6c36dba244ae0b266fc52a5206ab202a36c} \\ \hline
 CD-HIT & 4.5.7 & \\ \hline
 Picard & 1.77 & \\ \hline
 bwa & 0.6.1-r104 & \\ \hline
+Bambus2 & Amos commit 2012-3-6 & \url{http://amos.git.sourceforge.net/git/gitweb.cgi?p=amos/amos;a=commit;h=7c70d6c36dba244ae0b266fc52a5206ab202a36c} \\ \hline
 samtoafg & Amos commit 2012-3-6 & \url{http://amos.git.sourceforge.net/git/gitweb.cgi?p=amos/amos;a=commit;h=7c70d6c36dba244ae0b266fc52a5206ab202a36c} \\ \hline 
+Ray & 2.1.0 & \url{http://denovoassembler.sourceforge.net/}
 \end{tabular}
 \caption{Program versions used for the analysis}
 \label{tab:programversions}
@@ -453,6 +529,7 @@ velvetnoscaf & Run \verb!velveth $dir 31,84,2 -fastq -shortPaired $pairs.fastq! 
 velvetscaf & Run \verb!velveth $dir 31,84,2 -fastq -shortPaired $pairs.fastq! and run \verb!velvetg -scaffolding yes -exp_cov auto! on the resulting directories.\\\hline
 metavelvetnoscaf & Run \verb!velveth $dir 31,84,2 -fastq -shortPaired $pairs.fastq! and run \verb!velvetg -scaffolding no -exp_cov auto -read_trkg yes && -scaffolding no! on the resulting directories.\\\hline
 metavelvetscaf & Run \verb!velveth $dir 31,84,2 -fastq -shortPaired $pairs.fastq! and run \verb!velvetg -scaffolding no -exp_cov auto -read_trkg yes && -scaffolding yes! on the resulting directories.\\\hline
+raynoscaf & Run \verb!Ray -k $kmersize -i $pairs.fastq -o output_dir!.\\\hline
 minimus2* & Concatenate contigs larger than 200 and run \newline\verb!cd-hit-est -c 0.99 -i $concat.fasta -o $derep.fasta! to remove similar sequences. Run \verb!toAmos -s $derep.fasta -o $derep.afg! followed by \verb!minimus2 $derep!. From \url{http://ged.msu.edu/angus/metag-assembly-2011/velvet-multik.html} \\\hline
 newbler* & Cut all contigs up in chunks of 1999 bases with an overlap of 1900 bases and run\newline \verb!runAssembly -o $dir $cut-up-contigs.fasta!. From \cite{Luo22347999}. \\\hline
 bambus2* & Map paired reads with \verb!bwa! using default parameters to contigs and remove duplicate reads with \verb!MarkDuplicates!. Run \verb!samtoafg! to convert to afg, import to Amos bnk with \verb!bank-transact! and finally run \verb!goBambus2!.\\\hline
@@ -536,14 +613,14 @@ No & Genome Name & Genome Size (bp) & Domain & Phylum & Class \\
 48 & Zymomonas mobilis mobilis ZM4 & 2223497 & Bacteria & Proteobacteria & Alphaproteobacteria \\
 49 & Archaeoglobus fulgidus DSM 4304 & 2178400 & Archaea & Euryarchaeota & Archaeoglobi \\
 50 & Ignicoccus hospitalis KIN4/I & 1297538 & Archaea & Crenarchaeota & Thermoprotei \\
-51 & Methanocaldococcus jannaschii DSM 2661 & 1 664 970 & Archaea & Euryarchaeota & Methanococci \\
-52 & Methanococcus maripaludis C5 & 1 780 761 & Archaea & Euryarchaeota & Methanococci \\
-53 & Methanococcus maripaludis S2 & 1 661 137 & Archaea & Euryarchaeota & Methanococci \\
-54 & Nanoarchaeum equitans Kin4-M & 490 885 & Archaea & Nanoarchaeota & Nanoarchaea \\
-55 & Pyrobaculum aerophilum IM2 & 2 222 430 & Archaea & Crenarchaeota & Thermoprotei \\
-56 & Pyrobaculum calidifontis JCM 11548 & 2 009 313 & Archaea & Crenarchaeota & Thermoprotei \\
-57 & Pyrococcus horikoshii OT3 & 1 738 505 & Archaea & Euryarchaeota & Thermococci \\
-58 & Sulfolobus tokodaii 7(S311) & 2 694 756 & Archaea & Crenarchaeota & Thermoprotei \\
+51 & Methanocaldococcus jannaschii DSM 2661 & 1 664 970 & Archaea & Euryarchaeota & Methanococci \\
+52 & Methanococcus maripaludis C5 & 1 780 761 & Archaea & Euryarchaeota & Methanococci \\
+53 & Methanococcus maripaludis S2 & 1 661 137 & Archaea & Euryarchaeota & Methanococci \\
+54 & Nanoarchaeum equitans Kin4-M & 490 885 & Archaea & Nanoarchaeota & Nanoarchaea \\
+55 & Pyrobaculum aerophilum IM2 & 2 222 430 & Archaea & Crenarchaeota & Thermoprotei \\
+56 & Pyrobaculum calidifontis JCM 11548 & 2 009 313 & Archaea & Crenarchaeota & Thermoprotei \\
+57 & Pyrococcus horikoshii OT3 & 1 738 505 & Archaea & Euryarchaeota & Thermococci \\
+58 & Sulfolobus tokodaii 7(S311) & 2 694 756 & Archaea & Crenarchaeota & Thermoprotei \\
 59 & Treponema vincentii I & 2512734 & Bacteria & Spirochaetes & Spirochaetia \\
 %60 & Erwinia chrysanthemi & 3909000 & Bacteria & Proteobacteria; & Gammaproteobacteria \\
 \end{longtable}
