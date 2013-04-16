@@ -297,8 +297,8 @@ case a reference metagenome is available often focuses on one or more of the
 following points:
 \begin{itemize}
 \item contig or scaffold length distribution
-\item chimericity of the contigs/scaffolds
 \item contig/scaffold coverage of the reference metagenome
+\item chimericity of the contigs/scaffolds
 \item functional annotation
 \item phylogenetic classification
 \end{itemize}
@@ -308,10 +308,16 @@ improve the functional annotation and the phylogenetic classification.
 annotation.\\
 
 
+\subsection{Length distribution}
 A variety of metrics are used in this validation. For the contig/scaffold
 length distribution of an assembly a common metric called the L50 value is
 used. L50 is a median value weighted by contig length. Half of all the bases in
-the assembly is in contigs equal to or larger than L50. For determining how
+the assembly is in contigs equal to or larger than L50.
+
+
+\subsection{Coverage of the reference metagenome}
+\label{sec:cov}
+For determining how
 well the assemblies matched the reference metagenome the assemblies were mapped
 against the reference metagenome using MUMmer 3.1 \cite{Kurtz14759262}.  MUMmer
 finds maximal exact matches longer than $l$ and clusters them if they are no
@@ -332,6 +338,25 @@ its location in both the query and the reference, percent identity, percent
 similarity and percent of the reference and query covered.\\
 
 
+To indicate how well the metagenome is covered by the assembled contigs we use
+a metric called genome contig coverage and metagenome contig coverage. For each
+genome in the reference metagenome, genome contig coverage is determined by
+dividing the number of bases that are covered by contigs mapping to it by the
+total number of bases in the genome. Metagenome contig coverage is the number
+of bases covered by all contigs mapping to it divided by the total number of
+bases in the metagenome. In both cases only the best alignment for each contig
+is used. The best alignment is the one with the highest purity score (for an
+explanation of the purity score see Section \ref{sec:chimer}. In case a contig
+aligns equally well to multiple locations, only the first alignment is
+considered. This could for instance be a contig that represents a repeat or a
+shared region between genomes. By only counting one such alignment not
+resolving a repeat or shared region is penalized, do note that in general
+there's little difference between counting all such alignments or only one in
+bacterial and archaeal genomes \cite{repeat shared region size}.
+
+
+\subsection{Chimericity}
+\label{sec:chimer}
 In previous research by \citet{Mavromatis17468765} chimericity of
 each contig was determined by the reads mapping to it. This could be done
 because reads were selected from finished genome projects, thus 
@@ -362,33 +387,55 @@ For both scaffolds and contigs, only nucleotides are counted when determining
 $l$.\\
 
 
-To indicate how well the metagenome is covered by the assembled contigs we use
-a metric called genome contig coverage and metagenome contig coverage. For each
-genome in the reference metagenome, genome contig coverage is determined by
-dividing the number of bases that are covered by contigs mapping to it by the
-total number of bases in the genome. Metagenome contig coverage is the number
-of bases covered by all contigs mapping to it divided by the total number of
-bases in the metagenome. In both cases only the best alignment for each contig
-based on previously described purity metric are considered. In case a contig
-aligns equally well to multiple locations, all alignments are considered. This
-can for instance be the case for a contig that represents a repeat or a shared
-region between genomes.
+\section{Pipelines} The vast amount of assemblies and validations that had to be performed
+on a variety of libraries gave rise to a need for automation. This resulted in
+the development of two pipelines: MetAssemble and MASMVALI (Metagenomic
+ASseMbly VALIdation). The former for performing the assemblies, the latter for
+validating them given there is a reference metagenome available.
 
-\subsection{Pipeline} The vast amount of assemblies that had to be performed
-gave rise to a need for automation. The pipeline had to be robust to errors
-because the assembly programs often suffer from unexpected crashes for
-different libraries. One would prefer to have assemblies not depended on a
-previously crashed assembly to execute anyway. That way the user can decide
-whether spending time on fixing the error for that assembly and the dependent
-assemblies is worthwhile. Another important aspect was that the assemblies had
-to be reproducible otherwise an evaluation is of very little use to the
-scientific community. A pipeline called MetAssemble has been developed in GNU
-Make for Illumina paired reads. All assemblies can be done in one go or a
-specific assembly can be performed. It is also possible to only get the
-commands for a specific assembly by doing a dry-run so one can easily create
-their own scripts.
+\subsection{MetAssemble}
+MetAssemble implements the strategies in Table \ref{tab:asmstrat} and Figure
+\ref{fig:asmstrat}. The MetAssemble pipeline was written as a set of rules in
+GNU make \cite{GNU make}. GNU make was chosen for a number of reasons:
+\begin{itemize}
+\item It integrates skipping computation of previously computed files.
+    Recomputation is unfortunately only based on modification date, not on the
+    actual file contents, but it is good enough for our purposes.
+\item GNU make is widely available on Unix and Unix-like systems.
+\item After the validation one would want to share only the commands to do a
+    specific assembly i.e. not the entire pipeline. Doing a dry-run in GNU make
+    gives you the exact commands that generated a certain file.
+\end{itemize}
+One of the biggest problems in metagenomic assembly are the
+computational demands \cite{A practical comparison dada}. The size of the reads
+and the number of reads as well as the complexity and the structure of the
+sequenced community affect the computational demands. Therefore it is diffcult
+to determine the resource usage in advance. In our benchmark several strategies
+consist of parts with different computational requirements. Ray for instance
+runs over multiple nodes whereas merging with Newbler or Minimus2
+requires one node with a lot of memory. Claiming all these computational
+resources for the entire run of the pipeline would be a waste. To circumvent
+this issue an approach where each step in the pipeline is scheduled as a
+separate job using a job scheduler has been chosen. A library was developed for
+GNU make to schedule rules as jobs using either sbatch or qsub. The jobs are
+scheduled with dependencies on other jobs and the resource usage set for the
+rule \cite{link to github}. 
+
+\subsection{MASMVALI}
+After the assembly has been completed, the assembly can be validated by
+alignment against the reference metagenome. MASMVALI (Metagenomic ASseMbly
+VALIdation) is a pipeline written in Python\cite{Python} that calculates the
+statistics described in Section \ref{sec:metval}. As minimum input it takes the
+alignments found by MUMmer, a reference metagenome and an assembly. MASMVALI as
+a pipeline can generate a HTML report that shows a collection of the plots that
+are used in this thesis \cite{github link}. It is also possible to use MASMVALI
+as a package to do more analyses on generated assemblies using the available
+statistics. See for an example the available ipython notebook \cite{notebook
+example} \cite{ipython} \cite{notebook}.
 
 \chapter{Results}
+
+\section{Mock community libraries}
 All assemblies in Table \ref{tab:asmstrat} have been performed on the
 following libraries:
 \begin{description}
@@ -426,6 +473,12 @@ Figure \ref{fig:coverage50nguneven}. The median coverage is 3.\\
   \label{fig:coverage50nguneven}
 \end{figure}
 
+
+\section{Length distribution}
+
+\section{Metagenome coverage}
+
+\section{Chimericity}
 The assemblies have been mapped against the reference metagenome using MUMmer
 as described in Section \ref{sec:metval}. In Figure
 \ref{fig:l50purity50ng_even} a comparison of the assemblies of 50ng even on
