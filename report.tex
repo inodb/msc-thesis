@@ -439,12 +439,25 @@ example} \cite{ipython} \cite{notebook}.
 All assemblies in Table \ref{tab:asmstrat} have been performed on the
 following libraries:
 \begin{description}
-\item[50ng even] Community prepared with 50 ng Nextera library prepartion kit and equal
+
+
+\item[50ng even]
+
+    \includegraphics[width=0.1\textwidth]{figures/logos/even.png}
+
+    Community prepared with 50 ng Nextera library prepartion kit and equal
 genome copy numbers. The library has been sequenced with Illumina and contains
 $\sim$10M paired reads, each single read has a length of 100.
 %\item[500pg even] Community prepared with 500 pg Nextera library prepartion kit and equal
 %genome copy numbers.
-\item[50ng uneven] Community prepared with 50 ng Nextera library prepartion kit
+
+
+
+\item[50ng uneven]
+
+    \includegraphics[width=0.1\textwidth]{figures/logos/uneven.png}
+    
+    Community prepared with 50 ng Nextera library prepartion kit
 and phyla mixed similar to log-normal distributions of phyla in soil. The
 library has been sequenced with Illumina and contains $\sim$10M paired reads,
 each single read has a length of 100.
@@ -462,13 +475,17 @@ Figure \ref{fig:coverage50nguneven}. The median coverage is 3.\\
 
 \begin{figure}[ht!]
   \centering
-    \includegraphics[width=\textwidth]{figures/coverageperbase-50ng_even.pdf}
+    \includegraphics[width=0.1\textwidth]{figures/logos/even.png}
+  \centering
+    \includegraphics[width=\textwidth,trim=0 0 0 50, clip]{figures/coverageperbase-50ng_even.pdf}
   \caption{Coverage of 50ng even}
   \label{fig:coverage50ngeven}
 \end{figure}
 \begin{figure}[ht!]
   \centering
-    \includegraphics[width=\textwidth]{figures/coverageperbase-50ng_unbalanced.pdf}
+    \includegraphics[width=0.1\textwidth]{figures/logos/uneven.png}
+  \centering
+    \includegraphics[width=\textwidth,trim=0 0 0 50, clip]{figures/coverageperbase-50ng_unbalanced.pdf}
   \caption{Coverage of 50ng uneven}
   \label{fig:coverage50nguneven}
 \end{figure}
@@ -536,6 +553,108 @@ but no explanation for the cause of this behaviour has been found.
 Discuss.
 %Low coverage libraries
 %Future work from presentation
+\clearpage
+\begin{figure}[ht]
+\centering
+\thispagestyle{empty}
+\begin{minipage}{\textwidth}
+    \hspace*{0.15\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/even.png}}
+    \hspace*{0.30\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/uneven.png}}
+\end{minipage}
+\begin{minipage}{\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig.png}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/contig/l50_vs_global_purity.png}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig/l50_vs_global_purity.png}}
+\end{minipage}
+\begin{minipage}{\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig-merge.png}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/contig-merge/l50_vs_global_purity.png}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig-merge/l50_vs_global_purity.png}}
+\end{minipage}
+\begin{minipage}{\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/scaf.png}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/scaf/l50_vs_global_purity.png}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/scaf/l50_vs_global_purity.png}}
+\end{minipage}
+\begin{minipage}{\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig-scaf.png}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/contig-scaf/l50_vs_global_purity.png}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig-scaf/l50_vs_global_purity.png}}
+\end{minipage}
+\begin{minipage}{\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig-merge-scaf.png}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/contig-merge-scaf/l50_vs_global_purity.png}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig-merge-scaf/l50_vs_global_purity.png}}
+\end{minipage}
+\caption{All that jazz}
+\end{figure}
+\clearpage
+
+%\clearpage
+%\begin{landscape}
+%\begin{figure}[ht]
+%\noindent
+%\centering
+%\begin{minipage}{\textheight}
+%    \hspace*{0.21\textheight}
+%    \centering
+%    \raisebox{-0.5\height}{\includegraphics[width=0.1\textheight]{figures/logos/bambus2.png}}
+%    \hspace*{0.01\textheight}
+%    \centering
+%    \raisebox{-0.5\height}{\includegraphics[width=0.1\textheight]{figures/logos/bambus2.png}}
+%    \hspace*{0.01\textheight}
+%    \centering
+%    \raisebox{-0.5\height}{\includegraphics[width=0.1\textheight]{figures/logos/bambus2.png}}
+%    \hspace*{0.01\textheight}
+%    \centering
+%    \raisebox{-0.5\height}{\includegraphics[width=0.1\textheight]{figures/logos/bambus2.png}}
+%    \hspace*{0.01\textheight}
+%    \centering
+%    \raisebox{-0.5\height}{\includegraphics[width=0.1\textheight]{figures/logos/bambus2.png}}
+%    \hspace*{0.01\textheight}
+%\end{minipage}\\
+%\begin{minipage}{\textheight}
+%    \centering
+%    \raisebox{-0.5\height}{\includegraphics[width=0.2\textheight]{figures/logos/bambus2.png}}
+%    \hspace*{0.01\textheight}
+%    \centering
+%    \raisebox{-0.5\height}{\includegraphics[width=0.2\textheight]{figures/l50-purity-50ng_unbalanced.pdf}}
+%    \hspace*{0.01\textheight}
+%    \centering
+%    \raisebox{-0.5\height}{\includegraphics[width=0.2\textheight]{figures/l50-purity-50ng_unbalanced.pdf}}
+%    \hspace*{0.01\textheight}
+%    \centering
+%    \raisebox{-0.5\height}{\includegraphics[width=0.2\textheight]{figures/l50-purity-50ng_unbalanced.pdf}}
+%    \hspace*{0.01\textheight}
+%    \centering
+%    \raisebox{-0.5\height}{\includegraphics[width=0.2\textheight]{figures/l50-purity-50ng_unbalanced.pdf}}
+%    \hspace*{0.01\textheight}
+%    \centering
+%    \raisebox{-0.5\height}{\includegraphics[width=0.2\textheight]{figures/l50-purity-50ng_unbalanced.pdf}}
+%\end{minipage}
+%\caption{All that jazz}
+%\end{figure}
+%\end{landscape}
+%\clearpage
 
 \clearpage
 %\bibliographystyle{report.bst}
