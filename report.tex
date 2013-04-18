@@ -10,6 +10,7 @@
 \usepackage{hyperref}
 \usepackage{subfig}
 \usepackage{url}
+\usepackage[a4paper]{geometry}
 \begin{document}
 \title{MSc Thesis - Benchmark of {\em De Novo} Short Read Assembly Strategies for Metagenomics}
 \author{Ino de Bruijn\\ {\bf Supervisor:} Assistant Prof. Anders Andersson}
@@ -440,7 +441,6 @@ All assemblies in Table \ref{tab:asmstrat} have been performed on the
 following libraries:
 \begin{description}
 
-
 \item[50ng even]
 
     \includegraphics[width=0.1\textwidth]{figures/logos/even.png}
@@ -450,8 +450,6 @@ genome copy numbers. The library has been sequenced with Illumina and contains
 $\sim$10M paired reads, each single read has a length of 100.
 %\item[500pg even] Community prepared with 500 pg Nextera library prepartion kit and equal
 %genome copy numbers.
-
-
 
 \item[50ng uneven]
 
@@ -468,30 +466,50 @@ each single read has a length of 100.
 The original reads of each library were mapped against the reference genome
 using BWA \cite{Li20080505} and default values. Afterwards duplicates were
 removed with MarkDuplicates from Picard 1.77 (see also Table
-\ref{tab:programversions}). In Figure \ref{fig:coverage50ngeven} the even
-spread of the coverage for the even library can be observed with a median
-coverage of 10. The uneven library's coverage is more spread as can be seen in
-Figure \ref{fig:coverage50nguneven}. The median coverage is 3.\\
+\ref{tab:programversions}). In Figure \ref{fig:coverage50ngeven} for the even
+library, the even
+spread of the coverage over all the genomes in the metagenome can be observed. The median
+coverage over all bases is 10. The uneven library covers a couple of genomes
+very well \ref{fig:coverage50nguneven}. The median coverage over all bases is 3.\\
 
+% OLD half-time report
+%\begin{figure}[ht!]
+%  \centering
+%    \includegraphics[width=0.1\textwidth]{figures/logos/even.png}
+%  \centering
+%    \includegraphics[width=\textwidth,trim=0 0 0 50, clip]{figures/coverageperbase-50ng_even.pdf}
+%  \caption{Coverage of 50ng even}
+%  \label{fig:coverage50ngeven}
+%\end{figure}
+%\begin{figure}[ht!]
+%  \centering
+%    \includegraphics[width=0.1\textwidth]{figures/logos/uneven.png}
+%  \centering
+%    \includegraphics[width=\textwidth,trim=0 0 0 50, clip]{figures/coverageperbase-50ng_unbalanced.pdf}
+%  \caption{Coverage of 50ng uneven}
+%  \label{fig:coverage50nguneven}
+%\end{figure}
 \begin{figure}[ht!]
   \centering
-    \includegraphics[width=0.1\textwidth]{figures/logos/even.png}
+    \includegraphics[width=0.1\textwidth]{figures/logos/even.png}\\
   \centering
-    \includegraphics[width=\textwidth,trim=0 0 0 50, clip]{figures/coverageperbase-50ng_even.pdf}
+      \includegraphics[width=\textwidth,trim=0 0 0 40, clip]{figures/notebooks/chris-mock-even-distribution.png}
   \caption{Coverage of 50ng even}
   \label{fig:coverage50ngeven}
 \end{figure}
 \begin{figure}[ht!]
   \centering
-    \includegraphics[width=0.1\textwidth]{figures/logos/uneven.png}
+    \includegraphics[width=0.1\textwidth]{figures/logos/uneven.png}\\
   \centering
-    \includegraphics[width=\textwidth,trim=0 0 0 50, clip]{figures/coverageperbase-50ng_unbalanced.pdf}
+    \includegraphics[width=\textwidth,trim=0 0 0 40, clip]{figures/notebooks/chris-mock-uneven-distribution.png}
   \caption{Coverage of 50ng uneven}
   \label{fig:coverage50nguneven}
 \end{figure}
 
 
 \section{Length distribution}
+
+
 
 \section{Metagenome coverage}
 
@@ -535,18 +553,18 @@ the points from both Meta-Velvet and Velvet follow a more distorted path
 compared to the even community. There seem to be some specific clusters visible
 but no explanation for the cause of this behaviour has been found.
 
-\begin{figure}[ht!]
-  \centering
-    \includegraphics[width=\textwidth]{figures/l50-purity-50ng_even.pdf}
-  \caption{L50 versus Purity for 50ng even library. The Velvet assemblies have filled points while the Meta-Velvet assemblies have unfilled points.}
-  \label{fig:l50purity50ng_even}
-\end{figure}
-\begin{figure}[ht!]
-  \centering
-    \includegraphics[width=\textwidth]{figures/l50-purity-50ng_unbalanced.pdf}
-  \caption{L50 versus Purity for 50ng uneven library. The Velvet assemblies have filled points while the Meta-Velvet assemblies have unfilled points.}
-  \label{fig:l50purity50ng_uneven}
-\end{figure}
+%\begin{figure}[ht!]
+%  \centering
+%    \includegraphics[width=\textwidth]{figures/l50-purity-50ng_even.pdf}
+%  \caption{L50 versus Purity for 50ng even library. The Velvet assemblies have filled points while the Meta-Velvet assemblies have unfilled points.}
+%  \label{fig:l50purity50ng_even}
+%\end{figure}
+%\begin{figure}[ht!]
+%  \centering
+%    \includegraphics[width=\textwidth]{figures/l50-purity-50ng_unbalanced.pdf}
+%  \caption{L50 versus Purity for 50ng uneven library. The Velvet assemblies have filled points while the Meta-Velvet assemblies have unfilled points.}
+%  \label{fig:l50purity50ng_uneven}
+%\end{figure}
 
 
 \chapter{Discussion}
@@ -554,14 +572,16 @@ Discuss.
 %Low coverage libraries
 %Future work from presentation
 \clearpage
-\begin{figure}[ht]
+\newgeometry{top=0.1cm,left=0.1cm,right=0.1cm,bottom=0.1cm}
+\begin{figure}[p]
 \centering
 \thispagestyle{empty}
+%\vspace{-2cm}
 \begin{minipage}{\textwidth}
-    \hspace*{0.15\textwidth}
+    \hspace*{0.16\textwidth}
     \centering
     \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/even.png}}
-    \hspace*{0.30\textwidth}
+    \hspace*{0.25\textwidth}
     \centering
     \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/uneven.png}}
 \end{minipage}
@@ -569,45 +589,105 @@ Discuss.
     \centering
     \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig.png}}
     \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/contig/l50_vs_global_purity.png}}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/contig/l50_vs_global_purity.png}}
     \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig/l50_vs_global_purity.png}}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig/l50_vs_global_purity.png}}
 \end{minipage}
 \begin{minipage}{\textwidth}
     \centering
     \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig-merge.png}}
     \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/contig-merge/l50_vs_global_purity.png}}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/contig-merge/l50_vs_global_purity.png}}
     \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig-merge/l50_vs_global_purity.png}}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig-merge/l50_vs_global_purity.png}}
 \end{minipage}
 \begin{minipage}{\textwidth}
     \centering
     \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/scaf.png}}
     \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/scaf/l50_vs_global_purity.png}}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/scaf/l50_vs_global_purity.png}}
     \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/scaf/l50_vs_global_purity.png}}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/scaf/l50_vs_global_purity.png}}
 \end{minipage}
 \begin{minipage}{\textwidth}
     \centering
     \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig-scaf.png}}
     \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/contig-scaf/l50_vs_global_purity.png}}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/contig-scaf/l50_vs_global_purity.png}}
     \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig-scaf/l50_vs_global_purity.png}}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig-scaf/l50_vs_global_purity.png}}
 \end{minipage}
 \begin{minipage}{\textwidth}
     \centering
     \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig-merge-scaf.png}}
     \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/contig-merge-scaf/l50_vs_global_purity.png}}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/contig-merge-scaf/l50_vs_global_purity.png}}
     \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.31\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig-merge-scaf/l50_vs_global_purity.png}}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig-merge-scaf/l50_vs_global_purity.png}}
 \end{minipage}
 \caption{All that jazz}
 \end{figure}
 \clearpage
+\restoregeometry
+
+\clearpage
+\newgeometry{top=0.1cm,left=0.1cm,right=0.1cm,bottom=0.1cm}
+\begin{figure}[p]
+\centering
+\thispagestyle{empty}
+%\vspace{-2cm}
+\begin{minipage}{\textwidth}
+    \hspace*{0.16\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/even.png}}
+    \hspace*{0.25\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/uneven.png}}
+\end{minipage}
+\begin{minipage}{\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig.png}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/even-contig.pdf}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/uneven-contig.pdf}}
+\end{minipage}
+\begin{minipage}{\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig-merge.png}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/even-contig-merge.pdf}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/uneven-contig-merge.pdf}}
+\end{minipage}
+\begin{minipage}{\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/scaf.png}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/even-contig.pdf}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/uneven-contig.pdf}}
+\end{minipage}
+\begin{minipage}{\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig-scaf.png}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/even-contig-scaf.pdf}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/uneven-contig-scaf.pdf}}
+\end{minipage}
+\begin{minipage}{\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig-merge-scaf.png}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/even-contig-merge-scaf.pdf}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/uneven-contig-merge-scaf.pdf}}
+\end{minipage}
+\caption{All that jazz}
+\end{figure}
+\clearpage
+\restoregeometry
 
 %\clearpage
 %\begin{landscape}
@@ -665,10 +745,11 @@ Discuss.
 \appendix
 \clearpage
 \pagestyle{empty}
+\newgeometry{bottom=3cm}
 \begin{landscape}
 \footnotesize
 \begin{table}[htbp]
-\begin{tabular}{|l|r|p{10cm}|}
+\begin{tabular}{|l|r|p{9cm}|}
 \hline
 Program & Version & URL \\ \hline
 sickle & commit 2013-4-3 e435598aa6bbb74b3254d2884a9dea1b0639d464 & \url{https://github.com/najoshi/sickle} \\ \hline
@@ -682,7 +763,7 @@ Picard & 1.77 & \\ \hline
 bwa & 0.6.1-r104 & \\ \hline
 Bambus2 & Amos commit 2012-3-6 & \url{http://amos.git.sourceforge.net/git/gitweb.cgi?p=amos/amos;a=commit;h=7c70d6c36dba244ae0b266fc52a5206ab202a36c} \\ \hline
 samtoafg & Amos commit 2012-3-6 & \url{http://amos.git.sourceforge.net/git/gitweb.cgi?p=amos/amos;a=commit;h=7c70d6c36dba244ae0b266fc52a5206ab202a36c} \\ \hline 
-Ray & 2.1.0 & \url{http://denovoassembler.sourceforge.net/}
+Ray & 2.1.0 & \url{http://denovoassembler.sourceforge.net/} \\ \hline
 \end{tabular}
 \caption{Program versions used for the analysis}
 \label{tab:programversions}
