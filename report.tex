@@ -11,8 +11,11 @@
 \usepackage{subfig}
 \usepackage{url}
 \usepackage[a4paper]{geometry}
+
 \begin{document}
-\title{MSc Thesis - Benchmark of {\em De Novo} Short Read Assembly Strategies for Metagenomics}
+\input{macros}
+
+\title{MSc Thesis - Benchmark of {\em de novo} Short Read Assembly Strategies for Metagenomics}
 \author{Ino de Bruijn\\ {\bf Supervisor:} Assistant Prof. Anders Andersson}
 
 \maketitle
@@ -467,34 +470,18 @@ The original reads of each library were mapped against the reference genome
 using BWA \cite{Li20080505} and default values. Afterwards duplicates were
 removed with MarkDuplicates from Picard 1.77 (see also Table
 \ref{tab:programversions}). In Figure \ref{fig:coverage50ngeven} for the even
-library, the even
-spread of the coverage over all the genomes in the metagenome can be observed. The median
-coverage over all bases is 10. The uneven library covers a couple of genomes
-very well \ref{fig:coverage50nguneven}. The median coverage over all bases is 3.\\
+library, the even spread of the coverage over all the genomes in the metagenome
+can be observed. The median coverage over all bases is 10. The uneven library
+covers a couple of genomes very well \ref{fig:coverage50nguneven}. The median
+coverage over all bases is 3.\\
 
-% OLD half-time report
-%\begin{figure}[ht!]
-%  \centering
-%    \includegraphics[width=0.1\textwidth]{figures/logos/even.png}
-%  \centering
-%    \includegraphics[width=\textwidth,trim=0 0 0 50, clip]{figures/coverageperbase-50ng_even.pdf}
-%  \caption{Coverage of 50ng even}
-%  \label{fig:coverage50ngeven}
-%\end{figure}
-%\begin{figure}[ht!]
-%  \centering
-%    \includegraphics[width=0.1\textwidth]{figures/logos/uneven.png}
-%  \centering
-%    \includegraphics[width=\textwidth,trim=0 0 0 50, clip]{figures/coverageperbase-50ng_unbalanced.pdf}
-%  \caption{Coverage of 50ng uneven}
-%  \label{fig:coverage50nguneven}
-%\end{figure}
 \begin{figure}[ht!]
   \centering
     \includegraphics[width=0.1\textwidth]{figures/logos/even.png}\\
   \centering
       \includegraphics[width=\textwidth,trim=0 0 0 40, clip]{figures/notebooks/chris-mock-even-distribution.png}
-  \caption{Coverage of 50ng even}
+  \caption{Read mean coverage of 50ng even per genome. Median coverage over all
+  bases is 10.}
   \label{fig:coverage50ngeven}
 \end{figure}
 \begin{figure}[ht!]
@@ -502,16 +489,64 @@ very well \ref{fig:coverage50nguneven}. The median coverage over all bases is 3.
     \includegraphics[width=0.1\textwidth]{figures/logos/uneven.png}\\
   \centering
     \includegraphics[width=\textwidth,trim=0 0 0 40, clip]{figures/notebooks/chris-mock-uneven-distribution.png}
-  \caption{Coverage of 50ng uneven}
+  \caption{Read mean coverage of 50ng uneven per genome. Median coverage over
+  all bases is 3.}
   \label{fig:coverage50nguneven}
 \end{figure}
 
 
 \section{Length distribution}
+\begin{figure}[ht!]
+  \centering
+    \includegraphics[width=0.1\textwidth]{figures/logos/even.png}
+    \includegraphics[width=0.1\textwidth]{figures/logos/contig.png}\\
+  \centering
+    \includegraphics[width=\textwidth,trim=0 0 0 40, clip]{figures/notebooks/chris-mock-length-distribution/even-contig.pdf}
+  \caption{Length distribution comparison of different contiging strategies.
+      Sum of bases shown as a function of contig length, x-axis is log-scaled
+      and inverted. }
+  \label{fig:length-distribution-even-contig-length}
+\end{figure}
+
+In Figure \ref{fig:length-distribution-even-contig-length} the length
+distribution of the contiging strategies are shown. Each plotted line
+represents one assembly. The dots are L50 values. The assemblies are based on
+reads from the even library. For each assembly strategy the assembly with a
+kmer that resulted in the highest L50 has been chosen. For {\em velvetnoscaf}
+and {\em metavelvetnoscaf} $k=25$, for Ray $k=21$. Meta-Velvet scores the
+highest on L50, but not only by combining contigs not combined by Velvet.  It
+actually also removes a lot of short contigs from the original Velvet assembly,
+resulting in a lower total sum of bases. Depending on what size of contigs are
+required for the post post-processing the winner differs. Longer than 100,
+Velvet and to a lesser extent Ray give more total bases, but longer than 1000
+Meta-Velvet would seem a better candidate.\\
 
 
+In Figure \ref{fig:chris-mock-length-distribution-roc} all assembly strategies
+are compared over length distributions. On the x-axis are contig numbers where
+contigs in each assembly are numbered by size from largest to smallest. In
+general the even library proofs an easier target for the assemblers than the unbalanced
+library. In the first row that shows the contiging strategies, the unbalanced
+sample increases the gap in sum of bases between Meta-Velvet and the other
+assemblers even more. The merging strategies increase lengths quite
+significantly for both libraries. The difference between Newbler and Minimus2
+being rather small. Minimus2 results in slightly larger contigs, whereas
+Newbler reaches a higher sum in some cases. The internal scaffolding options of
+the assemblers improve lengths slightly, but the sum of bases decreases
+substantially. For the external scaffolder, Bambus2, the sum decreases even
+more.
+
+% One page figure over length distributions roc style
+\onepagecmp{chris-mock-length-distribution-roc}{A comparison of assembly
+strategies on length distributions. Contigs ordered by numbering from longest
+to shortest.}
 
 \section{Metagenome coverage}
+Dadada
+
+\onepagecmp{chris-mock-length-distribution-cov-roc}{A comparison of assembly
+strategies on metagenome coverage. Contigs ordered by numbering from longest to
+shortest.}
 
 \section{Chimericity}
 The assemblies have been mapped against the reference metagenome using MUMmer
@@ -552,25 +587,7 @@ contigs before scaffolding is disadvantageous in this case. The distribution of
 the points from both Meta-Velvet and Velvet follow a more distorted path
 compared to the even community. There seem to be some specific clusters visible
 but no explanation for the cause of this behaviour has been found.
-
-%\begin{figure}[ht!]
-%  \centering
-%    \includegraphics[width=\textwidth]{figures/l50-purity-50ng_even.pdf}
-%  \caption{L50 versus Purity for 50ng even library. The Velvet assemblies have filled points while the Meta-Velvet assemblies have unfilled points.}
-%  \label{fig:l50purity50ng_even}
-%\end{figure}
-%\begin{figure}[ht!]
-%  \centering
-%    \includegraphics[width=\textwidth]{figures/l50-purity-50ng_unbalanced.pdf}
-%  \caption{L50 versus Purity for 50ng uneven library. The Velvet assemblies have filled points while the Meta-Velvet assemblies have unfilled points.}
-%  \label{fig:l50purity50ng_uneven}
-%\end{figure}
-
-
-\chapter{Discussion}
-Discuss.
-%Low coverage libraries
-%Future work from presentation
+% Purity
 \clearpage
 \newgeometry{top=0.1cm,left=0.1cm,right=0.1cm,bottom=0.1cm}
 \begin{figure}[p]
@@ -625,69 +642,31 @@ Discuss.
     \hspace*{0.01\textwidth}
     \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig-merge-scaf/l50_vs_global_purity.png}}
 \end{minipage}
-\caption{All that jazz}
+\caption{Global purity as a function of L50. Compared over all assembly
+strategies.}
 \end{figure}
 \clearpage
 \restoregeometry
 
-\clearpage
-\newgeometry{top=0.1cm,left=0.1cm,right=0.1cm,bottom=0.1cm}
-\begin{figure}[p]
-\centering
-\thispagestyle{empty}
-%\vspace{-2cm}
-\begin{minipage}{\textwidth}
-    \hspace*{0.16\textwidth}
-    \centering
-    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/even.png}}
-    \hspace*{0.25\textwidth}
-    \centering
-    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/uneven.png}}
-\end{minipage}
-\begin{minipage}{\textwidth}
-    \centering
-    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig.png}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/even-contig.pdf}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/uneven-contig.pdf}}
-\end{minipage}
-\begin{minipage}{\textwidth}
-    \centering
-    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig-merge.png}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/even-contig-merge.pdf}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/uneven-contig-merge.pdf}}
-\end{minipage}
-\begin{minipage}{\textwidth}
-    \centering
-    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/scaf.png}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/even-contig.pdf}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/uneven-contig.pdf}}
-\end{minipage}
-\begin{minipage}{\textwidth}
-    \centering
-    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig-scaf.png}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/even-contig-scaf.pdf}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/uneven-contig-scaf.pdf}}
-\end{minipage}
-\begin{minipage}{\textwidth}
-    \centering
-    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig-merge-scaf.png}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/even-contig-merge-scaf.pdf}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/notebooks/chris-mock-length-distribution/uneven-contig-merge-scaf.pdf}}
-\end{minipage}
-\caption{All that jazz}
-\end{figure}
-\clearpage
-\restoregeometry
+%\begin{figure}[ht!]
+%  \centering
+%    \includegraphics[width=\textwidth]{figures/l50-purity-50ng_even.pdf}
+%  \caption{L50 versus Purity for 50ng even library. The Velvet assemblies have filled points while the Meta-Velvet assemblies have unfilled points.}
+%  \label{fig:l50purity50ng_even}
+%\end{figure}
+%\begin{figure}[ht!]
+%  \centering
+%    \includegraphics[width=\textwidth]{figures/l50-purity-50ng_unbalanced.pdf}
+%  \caption{L50 versus Purity for 50ng uneven library. The Velvet assemblies have filled points while the Meta-Velvet assemblies have unfilled points.}
+%  \label{fig:l50purity50ng_uneven}
+%\end{figure}
+
+
+\chapter{Discussion}
+Discuss.
+%Low coverage libraries
+%Future work from presentation
+
 
 %\clearpage
 %\begin{landscape}
