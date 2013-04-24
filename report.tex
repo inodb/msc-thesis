@@ -321,18 +321,17 @@ the assembly is in contigs equal to or larger than L50.
 
 \subsection{Coverage of the reference metagenome}
 \label{sec:cov}
-For determining how
-well the assemblies matched the reference metagenome the assemblies were mapped
-against the reference metagenome using MUMmer 3.1 \cite{Kurtz14759262}.  MUMmer
-finds maximal exact matches longer than $l$ and clusters them if they are no
-more than $g$ nucleotides apart. The alignments are afterwards extended for
-each cluster if the combined length of its matches is at least $c$. The
-alignments are extended in between the matches of the cluster and on the ends
-using a Smith-Waterman dynamic programming algorithm. The MUMmer package
-contains multiple scripts that make use of this approach. NUCmer
-(\underline{NUC}leotide MUM\underline{mer}) is a script included in the MUMmer
-package for DNA sequence alignment of a set of query contigs against a set of
-reference contigs. The command for NUCmer used was: 
+For determining how well the assemblies matched the reference metagenome the
+assemblies were mapped against the reference metagenome using MUMmer 3.1
+\cite{Kurtz14759262}.  MUMmer finds maximal exact matches longer than $l$ and
+clusters them if they are no more than $g$ nucleotides apart. The alignments
+are afterwards extended for each cluster if the combined length of its matches
+is at least $c$. The alignments are extended in between the matches of the
+cluster and on the ends using a Smith-Waterman dynamic programming algorithm.
+The MUMmer package contains multiple scripts that make use of this approach.
+NUCmer (\underline{NUC}leotide MUM\underline{mer}) is a script included in the
+MUMmer package for DNA sequence alignment of a set of query contigs against a
+set of reference contigs. The command for NUCmer used was:
 \verb!nucmer --maxmatch -c65 -g90 -l20!. The maxmatch parameter makes sure all
 exact matches are used, whether they are unique or not, so contigs that consist
 only of a shared region or a repetitive element will be included in the
@@ -354,9 +353,9 @@ explanation of the purity score see Section \ref{sec:chimer}. In case a contig
 aligns equally well to multiple locations, only the first alignment is
 considered. This could for instance be a contig that represents a repeat or a
 shared region between genomes. By only counting one such alignment not
-resolving a repeat or shared region is penalized, do note that in general
-there's little difference between counting all such alignments or only one in
-bacterial and archaeal genomes \cite{repeat shared region size}.
+resolving a repeat or shared region is penalized. Note that in general there's
+little difference between counting all such alignments or only one in bacterial
+and archaeal genomes \cite{repeat shared region size}.
 
 
 \subsection{Chimericity}
@@ -380,7 +379,7 @@ coverage by percent identity divided by 10,000 to get the purity as a ratio
 between 0 and 1. The purity of a contig is the maximum purity of all its
 alignments. Purity of an entire assembly is computed as well. If $n$ is the
 number of contigs, $l_1,...,l_n$ the length of each contig in nucleotides and
-$p_1,...,p_n$ the purity of each contig then purity $P$ of an entire
+$p_1,...,p_n$ the purity of each contig then the global purity $P$ of an entire
 assembly is calculated as:
 
 \begin{equation}
@@ -391,11 +390,11 @@ For both scaffolds and contigs, only nucleotides are counted when determining
 $l$.\\
 
 
-\section{Pipelines} The vast amount of assemblies and validations that had to be performed
-on a variety of libraries gave rise to a need for automation. This resulted in
-the development of two pipelines: MetAssemble and MASMVALI (Metagenomic
-ASseMbly VALIdation). The former for performing the assemblies, the latter for
-validating them given there is a reference metagenome available.
+\section{Pipelines} The vast amount of assemblies and validations that had to
+be performed on a variety of libraries gave rise to a need for automation. This
+resulted in the development of two pipelines: MetAssemble and MASMVALI
+(Metagenomic ASseMbly VALIdation). The former for performing the assemblies,
+the latter for validating them given there is a reference metagenome available.
 
 \subsection{MetAssemble}
 MetAssemble implements the strategies in Table \ref{tab:asmstrat} and Figure
@@ -479,7 +478,7 @@ coverage over all bases is 3.\\
   \centering
     \includegraphics[width=0.1\textwidth]{figures/logos/even.png}\\
   \centering
-      \includegraphics[width=\textwidth,trim=0 0 0 40, clip]{figures/notebooks/chris-mock-even-distribution.png}
+      \includegraphics[width=0.8\textwidth,trim=35 20 35 33, clip]{figures/notebooks/chris-mock-even-distribution.png}
   \caption{Read mean coverage of 50ng even per genome. Median coverage over all
   bases is 10.}
   \label{fig:coverage50ngeven}
@@ -488,7 +487,7 @@ coverage over all bases is 3.\\
   \centering
     \includegraphics[width=0.1\textwidth]{figures/logos/uneven.png}\\
   \centering
-    \includegraphics[width=\textwidth,trim=0 0 0 40, clip]{figures/notebooks/chris-mock-uneven-distribution.png}
+    \includegraphics[width=0.8\textwidth,trim=35 20 35 33, clip]{figures/notebooks/chris-mock-uneven-distribution.png}
   \caption{Read mean coverage of 50ng uneven per genome. Median coverage over
   all bases is 3.}
   \label{fig:coverage50nguneven}
@@ -496,12 +495,13 @@ coverage over all bases is 3.\\
 
 
 \section{Length distribution}
+\label{res:len}
 \begin{figure}[ht!]
   \centering
     \includegraphics[width=0.1\textwidth]{figures/logos/even.png}
     \includegraphics[width=0.1\textwidth]{figures/logos/contig.png}\\
   \centering
-    \includegraphics[width=\textwidth,trim=0 0 0 40, clip]{figures/notebooks/chris-mock-length-distribution/even-contig.pdf}
+    \includegraphics[width=0.8\textwidth,trim=35 20 35 33, clip]{figures/notebooks/chris-mock-length-distribution/even-contig.pdf}
   \caption{Length distribution comparison of different contiging strategies.
       Sum of bases shown as a function of contig length, x-axis is log-scaled
       and inverted. }
@@ -519,74 +519,117 @@ actually also removes a lot of short contigs from the original Velvet assembly,
 resulting in a lower total sum of bases. Depending on what size of contigs are
 required for the post post-processing the winner differs. Longer than 100,
 Velvet and to a lesser extent Ray give more total bases, but longer than 1000
-Meta-Velvet would seem a better candidate.\\
-
+Meta-Velvet would seem a better candidate. When comparing length distributions
+between different assemblers, only looking at L50 is thus not enough. Only to
+compare length distributions between assemblies stemming from the same assembly
+strategy L50 can be used.\\
 
 In Figure \ref{fig:chris-mock-length-distribution-roc} all assembly strategies
 are compared over length distributions. On the x-axis are contig numbers where
 contigs in each assembly are numbered by size from largest to smallest. In
-general the even library proofs an easier target for the assemblers than the unbalanced
-library. In the first row that shows the contiging strategies, the unbalanced
-sample increases the gap in sum of bases between Meta-Velvet and the other
-assemblers even more. The merging strategies increase lengths quite
+general the even library proofs an easier target for the assemblers than the
+uneven library. In the first row that shows the contiging strategies, the
+uneven sample increases the gap in sum of bases between Meta-Velvet and the
+other assemblers even more. The merging strategies increase lengths quite
 significantly for both libraries. The difference between Newbler and Minimus2
 being rather small. Minimus2 results in slightly larger contigs, whereas
 Newbler reaches a higher sum in some cases. The internal scaffolding options of
-the assemblers improve lengths slightly, but the sum of bases decreases
-substantially. For the external scaffolder, Bambus2, the sum decreases even
-more.
+the assemblers improves lengths, but the sum of bases decreases substantially.
+For the external scaffolder, Bambus2, the sum decreases even more.\\
+
+
+Notice also how the internal scaffolder from Meta-Velvet and Velvet result in
+the same assembly for the even library. Meta-Velvet is based on following
+multiple peaks in the coverage distribution where each peak would theoretically
+represent an organism. Velvet can follow one peak with the \verb!-exp_cov auto!
+parameter. For the contiging approach however this parameter is not set (See
+Table \ref{tab:asmstratparameters}), but for Meta-Velvet it is, which results
+in different assemblies for the even library.  To enable internal scaffolding
+in Velvet one has to set the \verb!-exp_cov auto!  parameter, making Velvet and
+Meta-Velvet follow the same peak in coverage for the even library. For the
+uneven library the results differ, since Meta-Velvet finds multiple peaks and
+Velvet only uses one. 
+
+
+\section{Metagenome coverage}
+In Figure \ref{fig:chris-mock-length-distribution-cov-roc} the sum of bases
+axes from Figure \ref{fig:chris-mock-length-distribution-roc} have been
+replaced by the metagenome coverage. The actual non-overlapping contig coverage
+of the reference metagenome after adding a particular contig (see Section
+\ref{sec:cov}).  An addition of a contig that doesn't increase the metagenome
+coverage by its own length could be due to:
+\begin{enumerate}
+\item\label{en:aln} the contig not aligning anywhere
+\item\label{en:chi} the contig aligns only partially because it is chimeric or has errors
+\item\label{en:dup} the mapping location is already partially or fully covered by another
+contig.
+\end{enumerate}
+Overal the plots look very similar to the original length distributions.  The
+increase in coverage is less smooth than the increase in length indicating that
+one or more of the three previously mentioned points occur, but not in an
+extreme fashion. In case no reference metagenome is available looking at the
+length distributions in this manner is thus a good indication of the metagenome
+coverage.\\
+
+
+We found that nearly all contigs for each assembly are aligning \cite{table??}.
+None of the assemblers thus creates invalid contigs. Whether point \ref{en:chi}
+or \ref{en:dup} is the case is shown in Section \ref{sec:reschi} for the
+different assembly strategies.
+
 
 % One page figure over length distributions roc style
 \onepagecmp{chris-mock-length-distribution-roc}{A comparison of assembly
 strategies on length distributions. Contigs ordered by numbering from longest
 to shortest.}
 
-\section{Metagenome coverage}
-Dadada
-
 \onepagecmp{chris-mock-length-distribution-cov-roc}{A comparison of assembly
 strategies on metagenome coverage. Contigs ordered by numbering from longest to
 shortest.}
 
 \section{Chimericity}
-The assemblies have been mapped against the reference metagenome using MUMmer
-as described in Section \ref{sec:metval}. In Figure
-\ref{fig:l50purity50ng_even} a comparison of the assemblies of 50ng even on
-purity and L50 can be seen. The upper right corner contains the assembly that
-has the least amount of chimericity and the best contig lengths. The assemblies
-seem to perform a lot better for smaller $k$. One would expect to find a sweet
-spot for $k$ where lowering $k$ would result in more kmer coverage but more
-connectivity in the de Bruijn graph and thus possibly impurer or even shorter
-contigs. Upping $k$ would reduce coverage too much to increase contig length.
-Such a spot is indeed visible for {\em velvetnoscaf},{\em metavelvetnoscaf} and
-{\em velvetscaf} in the top left corner although the purity does not decrease
-substantially for smaller $k$, whereas the L50 doubles or even triples. The
-contig extension seems to be bound by kmer coverage. Another peculiarity on
-first sight is that {\em metavelvetnoscaf} seems to perform identically to {\em
-velvetscaf}. The results are similar because for both these assemblies the
-parameter \verb!-exp_cov auto! was used for \verb!velvetg! and the scaffolding
-parameter of Velvet and Meta-Velvet's default parameters apparently don't
-improve the assembly. Meta-Velvet does not improve the Velvet assembly, because
-it is based on the idea that genomes have different coverage and tries to
-follow paths in the graph with identical coverage. Since all genomes have
-similar coverage \verb!velvetg -exp_cov auto!  performs equally well as
-\verb!meta-velvetg -exp_cov auto!. In a library with uneven genome abundances,
-following paths of identical coverage in the graph does improve the assembly
-compared to using one expected coverage as can be seen in Figure
-\ref{fig:l50purity50ng_uneven}, where assemblies of an unevenly balanced
-community are compared. Why only setting the expected coverage and not the
-scaffolding of Velvet increases L50 is unclear. For merging the assemblies of
-different kmers into one, Newbler outperforms Minimus2 both on purity and on
-L50. An even greater L50 length can be acquired by scaffolding afterwards with
-Bambus2, which performs exceptionally well. The best assemblies are
-acquired by merging Meta-Velvet assemblies with Minimus or Newbler and
-scaffolding them with Bambus2. Scaffolding of Meta-Velvet is significantly
-worse performing on purity than Bambus2. For the uneven community, the best
-assemblies are done by a combination of Meta-Velvet and Bambus2. Merging
-contigs before scaffolding is disadvantageous in this case. The distribution of
-the points from both Meta-Velvet and Velvet follow a more distorted path
-compared to the even community. There seem to be some specific clusters visible
-but no explanation for the cause of this behaviour has been found.
+\label{sec:reschi}
+To determine the chimericty of the contigs in an assembly the global purity
+metric described in Section \ref{sec:metval} is used. In Figure \ref{??} 
+all assemblies are compared on purity where global purity is shown as a
+function of L50. In this plot every dot represents a single assembly. The size
+of the dot represents the kmer size from 19 to 75. Although a high L50 is not a
+perfect indication of a good length distribution, it does allow one to see how
+increases in length are related to the chimericity of the contigs in the
+assembly. The L50 values are all based on a cut-off length of 100.\\
+
+
+The contiging strategies display a minor decrease in purity for an increase in
+L50 with shorter $k$. There is always some point visible for the Meta-Velvet
+assemblies where the L50 goes down again with a too short $k$. At that point
+the de Bruijn graph becomes saturated with too many connections. This point
+occurs between $k=20$ and $k=30$ for all three assemblers although for Velvet
+and Ray it is not clearly visible from the graph. The even community results in
+a more continuous line with varying $k$ than the uneven library for
+Meta-Velvet. For the uneven library some clusters are visible. No cause for
+these clusters has been researched, but a possible explanation is that it has
+to do with the way Meta-Velvet selects the coverage peaks, since that is a
+binary choice. At a certain $k$ the coverage threshold is reached and a peak is
+detected, which could give rise to the clusters in the plot.\\
+
+
+The merging strategies perform well, the L50 is increased and the purity is
+kept high. The Newbler assemblies are only slightly purer than Minimus2 in some
+cases. Therefore the bigger bigger contig lengths of Minimus2 compared to the
+metagenome coverage in Figure \ref{chris-mock-length-distribution-cov-roc} are
+probably due to duplicate contigs.\\
+
+
+The internal scaffolding introduces a lot of unpure contigs. Notice also how
+Ray's internal scaffolder decreases in purity with decreasing $k$, whereas
+Velvet and Meta-Velvet have increased purity with decreasing $k$. At the lower
+values of $k$ the purity is very similar. Bambus2 results in very pure
+assemblies. As demonstrated in Section \ref{res:len} the larger L50 values
+compared to the other assembly stategies is in large part a result of losing
+many short contigs.\\
+
+
+
 % Purity
 \clearpage
 \newgeometry{top=0.1cm,left=0.1cm,right=0.1cm,bottom=0.1cm}
@@ -663,7 +706,46 @@ strategies.}
 
 
 \chapter{Discussion}
-Discuss.
+It is difficult to name one true winner. Depending on the post-processing and
+the computational resources available the most suitable assembly strategy
+differs. In case one is only interested in post-processing contigs larger than
+1K, Meta-Velvet performs well. Larger than 100: Velvet is a suitable
+candidates. For large libraries that would require too much memory to run
+Velvet, Ray can be used. In general the merging strategies preform well on all
+three validated properties: length, metagenome coverage and purity. There are
+minor differences between using either Newbler or Minimus2 for merging.
+Minimus2 results in more duplication. So even though both mergers do not make
+use of metagenomic heuristics they perform well. A merger that does implement
+the use of all the information available, such as the read coverage of the
+contigs and pair linkage between contigs seems like a worthwhile project.\\
+
+
+The current results are only based on two libraries so future work of doing the
+same analysis on another library and the same or a different mock community
+would give more insight whether the conclusions hold in other circumstances.
+Ideally one could get an insight for each type of community what assembly
+strategy is preferred. Making the analysis in this paper available as a web
+service allowing users to run it on their own assembly, library, mock community
+combination and comparing them to the existing ones, could lead to a form of
+crowdsourced benchmarking.\\
+
+
+The post-processing steps such as taxonomic classification and gene annotation
+have not been part of this study. It would be significant to know what size of
+contigs can be used in these post-processing steps and what purity level is
+required. Is there a balance between length increase and purity loss that is
+benificial for a certain type of post-processing?\\
+
+
+Our efforts have focussed on validating assemblies when a reference is
+available. Apart from the length distribution plot that is a decent indication
+of metagenome coverage, no reference-less validation approaches have been
+suggested. Comparing our results versus a reference-less validation technique,
+such as Feature Response Curve \cite{TODO} or ALE \cite{TODO} would be a an
+important addition, especially since metagenomics rose out of the problem that
+the vast majority of microbes cannot be cultured in the lab.
+
+
 %Low coverage libraries
 %Future work from presentation
 
