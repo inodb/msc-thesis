@@ -1,0 +1,39 @@
+% Row images for full page comparison
+\newcommand{\imagerow}[2]{
+\begin{minipage}{\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/#2.png}}
+    \hspace*{0.01\textwidth}
+    % trim is left bottom right top
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth,trim=35 20 35 38,clip]{figures/notebooks/#1/even-#2.pdf}}
+    \hspace*{0.01\textwidth}
+    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth,trim=35 20 35 38,clip]{figures/notebooks/#1/uneven-#2.pdf}}
+\end{minipage}
+}
+
+% Full page comparison
+% First argument is directory location, also used as reference name for label.
+% Second argument is the caption
+\newcommand{\onepagecmp}[2]{
+\newgeometry{top=0.1cm,left=0.1cm,right=0.1cm,bottom=0.1cm}
+\begin{figure}[p]
+\centering
+\thispagestyle{empty}
+%\vspace{-2cm}
+\begin{minipage}{\textwidth}
+    \hspace*{0.16\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/even.png}}
+    \hspace*{0.25\textwidth}
+    \centering
+    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/uneven.png}}
+\end{minipage}
+\imagerow{#1}{contig}
+\imagerow{#1}{contig-merge}
+\imagerow{#1}{scaf}
+\imagerow{#1}{contig-scaf}
+\imagerow{#1}{contig-merge-scaf}
+\parbox{6in}{\caption{#2\label{fig:#1}}}
+\end{figure}
+\restoregeometry
+}
