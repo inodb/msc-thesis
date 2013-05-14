@@ -77,29 +77,6 @@ metagenome. In addition two pipelines have been constructed, one to perform the
 assemblies and another to perform the validation given there is a reference
 metagenome available.
 
-%\chapter{Theoretical Background}
-%% maybe mention some general paper overview of different assembly methods
-%% PRactical ZHang de novo genome assembly).
-%%Studying microbes in their natural environment is difficult for a number of reasons. One obvious
-%%reason is that their size makes field studies impractical. A way around this
-%%issue is culturing microbes in the laboratory. Unfortunately the vast majority of
-%%microbes have not successfully been cultured in the lab \cite{Eisen17355177}.
-%%By isolating the DNA of a community and sequencing that, analysis of a
-%%community $in vivo$ can be performed. The most popular methods for sequencing
-%%DNA from a sample of microbes are Illumina paired end and 454 sequencing (TODO:
-%%citations). The sequencing process results in short reads of around 100 bp for
-%%Illumina HiSeq and around 400 bp up to 1 kbp for 454 GS FLX Titanium (TODO:
-%%citations). After sequencing the reads can be mapped against a reference
-%%database of the same or closely related organisms to get a functional profile
-%%of the community. Assembling the reads into longer contiguous segments of DNA
-%%(contigs) before functional analysis has however been shown to improve the
-%%accuracy (TODO: citations). 
-%
-%
-%There are mainly three different categories of assembly approaches:
-%Greedy-extension, de Bruijn graph and Overlap-Layout-Consensus (OLC)
-%\cite{Zhangdadad}. Greedy-extension is a string-based method and the latter two
-%use graphs.
 
 \chapter{Related Work}
 % Start with success of single genome evaluation, continue to metagenomic
@@ -142,13 +119,13 @@ annotation.  Beyond using simulated reads or real reads of {\em in silico}
 communities there has not been a comparison of assembly algorithms using an
 {\em in vitro} community yet.  In vitro communities have been used previously
 with success to assess DNA extraction techniques for sequencing a low
-%TODO find number of genomes
 complexity community of nine bacterial genera \cite{Willner22514642}, an oral
-community \cite{Diaz22520388}, the human gut \cite{Wu20673359} and the human
-microbiome \cite{HMPC22699610}.  The advantage of using an {\em in vitro}
-community for assembly evaluation is that one does not have to rely on the
-correctness of sequencing simulators, the assessment can thus be as good as the
-similarity of the {\em in vitro } community to a real community.
+community of seven bacterial genomes \cite{Diaz22520388}, a human gut mock
+community of 10 bacterial genomes \cite{Wu20673359} and a human microbiome mock
+community of 21 bacterial genomes \cite{HMPC22699610}.  The advantage of using
+an {\em in vitro} community for assembly evaluation is that one does not have
+to rely on the correctness of sequencing simulators, the assessment can thus be
+as good as the similarity of the {\em in vitro } community to a real community.
 
 %Say something about GAGE and Assemblathon
 
@@ -202,10 +179,10 @@ strategies is possible. Velvet is one of the most used assembly programs and
 was therefore included in this assessment. Velvet's metagenomic counterpart,
 Meta-Velvet, is performed after executing Velvet so it is possible to determine
 how the metagenomic specific parameters improve the assembly. Another popular
-assembler that has recently received an update for metagenomics is Ray (TODO:
-cite). Ray is based on MPI and is runnable over multiple nodes distributing
-both memory and processor load, which makes it an ideal candidate for large
-metagenomic projects.\\
+assembler that has recently received an update for metagenomics is Ray
+\cite{Boisvert23259615}. Ray is based on MPI and is runnable over multiple
+nodes distributing both memory and processor load, which makes it an ideal
+candidate for large metagenomic projects.\\
 
 
 \subsection{Contiging}
@@ -304,8 +281,6 @@ newblerraynoscaf & Ray & Newbler & -\\
   \label{fig:asmstrat}
 \end{figure}
 
-%TODO Validation requires some more non-ambiguous parameters for calculating
-% the statistics and performing the mapping with MUMmer
 
 \clearpage \section{Validation} \label{sec:metval} The validation of a metagenomic assembly in
 case a reference metagenome is available often focuses on one or more of the
@@ -366,7 +341,7 @@ considered. This could for instance be a contig that represents a repeat or a
 shared region between genomes. By only counting one such alignment not
 resolving a repeat or shared region is penalized. Note that in general there's
 little difference between counting all such alignments or only one in bacterial
-and archaeal genomes \cite{repeat shared region size}.
+and archaeal genomes.
 
 
 \subsection{Chimericity}
@@ -407,11 +382,12 @@ be performed on a variety of libraries gave rise to a need for automation. This
 resulted in the development of two pipelines: MetAssemble and MASMVALI
 (Metagenomic ASseMbly VALIdation). The former for performing the assemblies,
 the latter for validating them given there is a reference metagenome available.
+The location of the repositories can be found in Table \ref{tab:devsoft}.
 
 \subsection{MetAssemble}
 MetAssemble implements the strategies in Table \ref{tab:asmstrat} and Figure
 \ref{fig:asmstrat}. The MetAssemble pipeline was written as a set of rules in
-GNU make \cite{GNU make}. GNU make was chosen for a number of reasons:
+GNU make. GNU make was chosen for a number of reasons:
 \begin{itemize}
 \item It integrates skipping computation of previously computed files.
     Recomputation is unfortunately only based on modification date, not on the
@@ -422,7 +398,7 @@ GNU make \cite{GNU make}. GNU make was chosen for a number of reasons:
     gives you the exact commands that generated a certain file.
 \end{itemize}
 One of the biggest problems in metagenomic assembly are the
-computational demands \cite{A practical comparison dada}. The size of the reads
+computational demands \cite{Zhang21423806}. The size of the reads
 and the number of reads as well as the complexity and the structure of the
 sequenced community affect the computational demands. Therefore it is diffcult
 to determine the resource usage in advance. In our benchmark several strategies
@@ -434,20 +410,32 @@ this issue an approach where each step in the pipeline is scheduled as a
 separate job using a job scheduler has been chosen. A library was developed for
 GNU make to schedule rules as jobs using either sbatch or qsub. The jobs are
 scheduled with dependencies on other jobs and the resource usage set for the
-rule \cite{link to github}. 
+rule. 
 
-\subsection{MASMVALI}
-After the assembly has been completed, the assembly can be validated by
-alignment against the reference metagenome. MASMVALI (Metagenomic ASseMbly
-VALIdation) is a pipeline written in Python\cite{Python} that calculates the
-statistics described in Section \ref{sec:metval}. As minimum input it takes an
-assembly, a reference metagenome and alignments found by MUMmer of the
-assembly against the reference metagenome. MASMVALI as a pipeline can generate
-a HTML report that shows a collection of the plots that are used in this thesis
-\cite{github link}. It is also possible to use MASMVALI as a package to do more
+\subsection{MASMVALI} After the assembly has been completed, the assembly can
+be validated by alignment against the reference metagenome. MASMVALI
+(Metagenomic ASseMbly VALIdation) is a pipeline written in Python that
+calculates the statistics described in Section \ref{sec:metval}. As minimum
+input it takes an assembly, a reference metagenome and alignments found by
+MUMmer of the assembly against the reference metagenome. MASMVALI as a pipeline
+can generate a HTML report that shows a collection of the plots that are used
+in this thesis. It is also possible to use MASMVALI as a package to do more
 analyses on generated assemblies using the available statistics. See for an
-example the available ipython notebook \cite{notebook example} \cite{ipython}
-\cite{notebook}.
+example the ipython notebook in Table \ref{tab:devsoft}.
+
+
+\begin{table}[h]
+\begin{tabular}{|l|p{9cm}|}
+\hline
+Name & URL \\ \hline
+MetAssemble & \url{https://github.com/inodb/metassemble} \\ \hline
+MASMVALI & \url{https://github.com/inodb/masmvali} \\ \hline
+MASMVALI ipyhton notebook example & \url{http://nbviewer.ipython.org/urls/raw.github.com/inodb/msc-thesis/master/notebooks/chris-mock-masmvali-length.ipynb} \\ \hline
+GNU Make job scheduler & \url{https://github.com/inodb/gnu-make-job-scheduler} \\ \hline
+\end{tabular}
+\caption{URLs for MASMVALI and MetAssemble}
+\label{tab:devsoft}
+\end{table}
 
 \chapter{Results}
 
@@ -509,45 +497,41 @@ coverage over all bases is 3.\\
 
 \section{Length distribution}
 \label{res:len}
-\begin{figure}[ht!]
-  \centering
-    \includegraphics[width=0.1\textwidth]{figures/logos/even.png}
-    \includegraphics[width=0.1\textwidth]{figures/logos/contig.png}\\
-  \centering
-    \includegraphics[width=0.8\textwidth,trim=35 20 35 33, clip]{figures/notebooks/chris-mock-length-distribution/even-contig.pdf}
-  \caption{Length distribution comparison of different contiging strategies.
-      Sum of bases shown as a function of contig length, x-axis is log-scaled
-      and inverted. }
-  \label{fig:length-distribution-even-contig-length}
-\end{figure}
+%\begin{figure}[ht!]
+%  \centering
+%    \includegraphics[width=0.1\textwidth]{figures/logos/even.png}
+%    \includegraphics[width=0.1\textwidth]{figures/logos/contig.png}\\
+%  \centering
+%    \includegraphics[width=0.8\textwidth,trim=35 20 35 33, clip]{figures/notebooks/chris-mock-length-distribution/even-contig.pdf}
+%  \caption{Length distribution comparison of different contiging strategies.
+%      Sum of bases shown as a function of contig length, x-axis is log-scaled
+%      and inverted. }
+%  \label{fig:length-distribution-even-contig-length}
+%\end{figure}
 
-In Figure \ref{fig:length-distribution-even-contig-length} the length
-distribution of the contiging strategies are shown. Each plotted line
-represents one assembly. The dots indicate L50 values on the x-axis. The assemblies are based on
-reads from the even library. For each assembly strategy the assembly with a
-kmer that resulted in the highest L50 has been chosen. For {\em velvetnoscaf}
-and {\em metavelvetnoscaf} $k=25$, for Ray $k=21$. Meta-Velvet scores the
-highest on L50, but not only by combining contigs not combined by Velvet.  It
-actually also removes a lot of short contigs from the original Velvet assembly,
-resulting in a lower total sum of bases. Depending on what size of contigs are
-required for the post post-processing the winner differs. Longer than 100,
-Velvet and to a lesser extent Ray give more total bases, but longer than 1000
-Meta-Velvet would seem a better candidate. When comparing length distributions
-between different assemblers, only looking at L50 is thus not enough. Only to
-compare length distributions between assemblies stemming from the same assembly
-strategy L50 can be used.\\
+In Figure \ref{fig:chris-mock-length-distribution} all assembly strategies are
+compared over length distributions. The dots indicate L50 values on the x-axis.
+For each assembly strategy the assembly with a kmer that resulted in the
+highest L50 has been chosen. As an example, for the contiging strategies on the reads from the
+even library (top left in Figure \ref{fig:chris-mock-length-distribution}),
+the assembly with the highest L50 value was for {\em velvetnoscaf} and {\em metavelvetnoscaf} $k=25$ and for Ray $k=21$.
+In this case Meta-Velvet scores the highest on L50, but not only by combining contigs that are not
+combined by Velvet. It actually also removes a lot of short contigs from the
+original Velvet assembly, resulting in a lower total sum of bases. Depending on
+what size of contigs are required for the post post-processing the winner
+differs. Longer than 100, Velvet and to a lesser extent Ray give more total
+bases, but longer than 1000 Meta-Velvet would seem a better candidate. When
+comparing length distributions between different assemblers, only looking at
+L50 is thus not enough.\\
 
-In Figure \ref{fig:chris-mock-length-distribution-roc} all assembly strategies
-are compared over length distributions. On the x-axis are contig numbers where
-contigs in each assembly are numbered by size from largest to smallest. In the
-first row that shows the contiging strategies, the uneven sample increases the
-gap in sum of bases between Meta-Velvet and the other assemblers even more. The
-merging strategies increase lengths quite significantly for both libraries. The
-difference between Newbler and Minimus2 being rather small. Minimus2 results in
-slightly larger contigs, whereas Newbler reaches a higher sum in some cases.
-The internal scaffolding options of the assemblers improves lengths, but the
-sum of bases decreases substantially.  For the external scaffolder, Bambus2,
-the sum decreases even more.\\
+In the first row that shows the contiging strategies, the uneven sample
+increases the gap in sum of bases between Meta-Velvet and the other assemblers
+even more. The merging strategies increase lengths quite significantly for both
+libraries. The difference between Newbler and Minimus2 being rather small.
+Minimus2 results in slightly larger contigs, only for Meta-Velvet the
+difference is substantial. The internal scaffolding options of the assemblers
+improves lengths, but the sum of bases decreases substantially. For the
+external scaffolder, Bambus2, the sum decreases even more.\\
 
 
 Notice also how the internal scaffolder from Meta-Velvet and Velvet result in
@@ -564,8 +548,8 @@ Velvet only uses one.
 
 
 \section{Metagenome coverage}
-In Figure \ref{fig:chris-mock-length-distribution-cov-roc} the sum of bases
-axes from Figure \ref{fig:chris-mock-length-distribution-roc} have been
+In Figure \ref{fig:chris-mock-length-distribution-cov} the sum of bases
+axes from Figure \ref{fig:chris-mock-length-distribution} have been
 replaced by the metagenome coverage. The actual non-overlapping contig coverage
 of the reference metagenome after adding a particular contig (see Section
 \ref{sec:cov}).  An addition of a contig that doesn't increase the metagenome
@@ -581,28 +565,32 @@ increase in coverage is less smooth than the increase in length indicating that
 one or more of the three previously mentioned points occur, but not in an
 extreme fashion. In case no reference metagenome is available looking at the
 length distributions in this manner is thus a good indication of the metagenome
-coverage.\\
+coverage. Only for the merging strategies significant differences can be
+spotted. The metagenome coverage for Minimus2 and Newbler follow more similar
+curves than is the case in Figure \ref{fig:chris-mock-length-distribution}.
+Merging with Newbler results in a higher coverage of the metagenome for both
+Velvet and Ray than merging with Minimus2.\\
 
 
-We found that nearly all contigs for each assembly are aligning \cite{table??}.
-None of the assemblers thus creates invalid contigs. Whether point \ref{en:chi}
-or \ref{en:dup} is the case is shown in Section \ref{sec:reschi} for the
-different assembly strategies.
+We found that nearly all contigs for each assembly are aligning. None of the
+assemblers thus creates bogus contigs. Whether point \ref{en:chi} or
+\ref{en:dup} is the case is shown in Section \ref{sec:reschi} for the different
+assembly strategies.
 
 
 % One page figure over length distributions roc style
-\onepagecmp{chris-mock-length-distribution}{A comparison of assembly
-strategies on length distributions. Contigs ordered by numbering from longest
-to shortest.}
+\onepagecmp{chris-mock-length-distribution}{A comparison of assembly strategies
+on length distributions. On the y-axis the sum of bases and on the x-axis the
+contig length.}
 
 \onepagecmp{chris-mock-length-distribution-cov}{A comparison of assembly
-strategies on metagenome coverage. Contigs ordered by numbering from longest to
-shortest.}
+strategies on metagenome coverage. On the y-axis the metagenome coverage and on
+the x-axis the contig length.}
 
 \section{Chimericity}
 \label{sec:reschi}
 To determine the chimericty of the contigs in an assembly the global purity
-metric described in Section \ref{sec:metval} is used. In Figure \ref{??} 
+metric described in Section \ref{sec:metval} is used. In Figure \ref{fig:chris-mock-purity-l50-asm-stats} 
 all assemblies are compared on purity where global purity is shown as a
 function of L50. In this plot every dot represents a single assembly. The size
 of the dot represents the kmer size from 19 to 75. Although a high L50 is not a
@@ -617,7 +605,7 @@ assemblies where the L50 goes down again with a too short $k$. At that point
 the de Bruijn graph becomes saturated with too many connections. This point
 occurs between $k=20$ and $k=30$ for all three assemblers although for Velvet
 and Ray it is not clearly visible from the graph. The even community results in
-a more continuous line with varying $k$ than the uneven library for
+a more continuous curve with varying $k$ than the uneven library for
 Meta-Velvet. For the uneven library some clusters are visible. No cause for
 these clusters has been researched, but a possible explanation is that it has
 to do with the way Meta-Velvet selects the coverage peaks, since that is a
@@ -626,10 +614,10 @@ detected, which could give rise to the clusters in the plot.\\
 
 
 The merging strategies perform well, the L50 is increased and the purity is
-kept high. The Newbler assemblies are only slightly purer than Minimus2 in some
-cases. Therefore the bigger bigger contig lengths of Minimus2 compared to the
-metagenome coverage in Figure \ref{chris-mock-length-distribution-cov-roc} are
-probably due to duplicate contigs.\\
+kept high. The Newbler assemblies are slightly purer than Minimus2. The larger
+contig lengths of Minimus2 compared to the metagenome coverage in Figure
+\ref{fig:chris-mock-length-distribution-cov} are thus at least partly due to
+chimeric contigs.\\
 
 
 The internal scaffolding introduces a lot of unpure contigs. Notice also how
@@ -642,7 +630,7 @@ many short contigs.\\
 
 
 \onepagecmp{chris-mock-purity-l50-asm-stats}{A comparison of assembly
-strategies on purity.}
+strategies on purity versus L50.}
 
 \chapter{Discussion}
 It is difficult to name one true winner. Depending on the post-processing and
@@ -653,7 +641,7 @@ candidates. For large libraries that would require too much memory to run
 Velvet, Ray can be used. In general the merging strategies preform well on all
 three validated properties: length, metagenome coverage and purity. There are
 minor differences between using either Newbler or Minimus2 for merging.
-Minimus2 results in more duplication. So even though both mergers do not make
+Minimus2 results in more chimerism in some cases. Even though both mergers do not make
 use of metagenomic heuristics they perform well. A merger that does implement
 the use of all the information available, such as the read coverage of the
 contigs and pair linkage between contigs seems like a worthwhile project.\\
@@ -680,7 +668,7 @@ Our efforts have focussed on validating assemblies when a reference is
 available. Apart from the length distribution plot that is a decent indication
 of metagenome coverage, no reference-less validation approaches have been
 suggested. Comparing our results versus a reference-less validation technique,
-such as Feature Response Curve \cite{TODO} or ALE \cite{TODO} would be a an
+such as Feature Response Curve \cite{Vezzi22319599} or ALE \cite{Clark23303509} would be a an
 important addition, especially since metagenomics rose out of the problem that
 the vast majority of microbes cannot be cultured in the lab.
 

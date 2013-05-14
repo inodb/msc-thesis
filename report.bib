@@ -1178,3 +1178,144 @@ between competing SAD models. Our analysis supports use of the
 lognormal as the null distribution for studying the SAD of bacterial
 communities as for plant and animal communities.}
 }
+@article{Vezzi22319599,
+	author = {Vezzi, F. and Narzisi, G. and Mishra, B.},
+	title = {Feature-by-feature--evaluating de novo sequence assembly.},
+	journal = {PLoS One},
+	volume = {7},
+	number = {2},
+	year = {2012},
+	pages = {e31002},
+	pmid = {22319599},
+	doi = {10.1371/journal.pone.0031002},
+	abstract = {The whole-genome sequence assembly (WGSA) problem is among one
+of the most studied problems in computational biology. Despite
+the availability of a plethora of tools (i.e., assemblers), all
+claiming to have solved the WGSA problem, little has been done
+to systematically compare their accuracy and power. Traditional
+methods rely on standard metrics and read simulation: while on
+the one hand, metrics like N50 and number of contigs focus only
+on size without proportionately emphasizing the information about
+the correctness of the assembly, comparisons performed on simulated
+dataset, on the other hand, can be highly biased by the non-realistic
+assumptions in the underlying read generator. Recently the Feature
+Response Curve (FRC) method was proposed to assess the overall
+assembly quality and correctness: FRC transparently captures the
+trade-offs between contigs' quality against their sizes. Nevertheless,
+the relationship among the different features and their relative
+importance remains unknown. In particular, FRC cannot account
+for the correlation among the different features. We analyzed
+the correlation among different features in order to better describe
+their relationships and their importance in gauging assembly quality
+and correctness. In particular, using multivariate techniques
+like principal and independent component analysis we were able
+to estimate the "excess-dimensionality" of the feature space.
+Moreover, principal component analysis allowed us to show how
+poorly the acclaimed N50 metric describes the assembly quality.
+Applying independent component analysis we identified a subset
+of features that better describe the assemblers performances.
+We demonstrated that by focusing on a reduced set of highly informative
+features we can use the FRC curve to better describe and compare
+the performances of different assemblers. Moreover, as a by-product
+of our analysis, we discovered how often evaluation based on simulated
+data, obtained with state of the art simulators, lead to not-so-realistic
+results.}
+}
+@article{Clark23303509,
+	author = {Clark, S.C. and Egan, R. and Frazier, P.I. and Wang, Z.},
+	title = {{ALE}: a generic assembly likelihood evaluation framework for assessing the accuracy of genome and metagenome assemblies.},
+	journal = {Bioinformatics},
+	volume = {29},
+	number = {4},
+	year = {2013},
+	month = {Feb},
+	pages = {435-443},
+	pmid = {23303509},
+	doi = {10.1093/bioinformatics/bts723},
+	abstract = {MOTIVATION: Researchers need general purpose methods for objectively
+evaluating the accuracy of single and metagenome assemblies and
+for automatically detecting  any errors they may contain. Current
+methods do not fully meet this need because  they require a reference,
+only consider one of the many aspects of assembly quality or lack
+statistical justification, and none are designed to evaluate metagenome
+assemblies. RESULTS: In this article, we present an Assembly Likelihood
+Evaluation (ALE) framework that overcomes these limitations, systematically
+evaluating the accuracy of an assembly in a reference-independent
+manner using rigorous statistical methods. This framework is comprehensive,
+and integrates read quality, mate pair orientation and insert
+length (for paired-end  reads), sequencing coverage, read alignment
+and k-mer frequency. ALE pinpoints synthetic errors in both single
+and metagenomic assemblies, including single-base errors, insertions/deletions,
+genome rearrangements and chimeric assemblies presented in metagenomes.
+At the genome level with real-world data, ALE identifies three
+large misassemblies from the Spirochaeta smaragdinae finished
+genome, which were all independently validated by Pacific Biosciences
+sequencing. At the single-base level with Illumina data, ALE recovers
+215 of 222 (97\%) single nucleotide variants in a training set
+from a GC-rich Rhodobacter sphaeroides genome. Using real Pacific
+Biosciences data, ALE identifies 12 of 12 synthetic errors in
+a Lambda Phage genome, surpassing even Pacific Biosciences' own
+variant caller, EviCons. In summary, the ALE framework provides
+a comprehensive, reference-independent and statistically rigorous
+measure of single genome and metagenome assembly accuracy, which
+can be used to identify misassemblies or to optimize the assembly
+process. AVAILABILITY: ALE is released as open source software
+under the UoI/NCSA license at \verb+http://www.alescore.org+.
+It is implemented in C and Python.}
+}
+@article{Boisvert23259615,
+	author = {Boisvert, S. and Raymond, F. and Godzaridis, E. and Laviolette, F. and Corbeil, J.},
+	title = {Ray Meta: scalable de novo metagenome assembly and profiling.},
+	journal = {Genome Biol},
+	volume = {13},
+	number = {12},
+	year = {2012},
+	month = {Dec},
+	pages = {R122},
+	pmid = {23259615},
+	doi = {10.1186/gb-2012-13-12-r122},
+	abstract = {Voluminous parallel sequencing datasets, especially metagenomic
+experiments, require distributed computing for de novo assembly
+and taxonomic profiling. Ray Meta is a massively distributed metagenome
+assembler that is coupled with Ray Communities, which profiles
+microbiomes based on uniquely-colored k-mers. It can  accurately
+assemble and profile a three billion read metagenomic experiment
+representing 1,000 bacterial genomes of uneven proportions in
+15 hours with 1,024 processor cores, using only 1.5 GB per core.
+The software will facilitate the processing of large and complex
+datasets, and will help in generating biological  insights for
+specific environments. Ray Meta is open source and available at
+\verb+http://denovoassembler.sf.net+.}
+}
+@article{Zhang21423806,
+	author = {Zhang, W. and Chen, J. and Yang, Y. and Tang, Y. and Shang, J. and Shen, B.},
+	title = {A practical comparison of de novo genome assembly software tools for next-generation sequencing technologies.},
+	journal = {PLoS One},
+	volume = {6},
+	number = {3},
+	year = {2011},
+	pages = {e17915},
+	pmid = {21423806},
+	doi = {10.1371/journal.pone.0017915},
+	abstract = {The advent of next-generation sequencing technologies is accompanied
+with the development of many whole-genome sequence assembly methods
+and software, especially for de novo fragment assembly. Due to
+the poor knowledge about the applicability and performance of
+these software tools, choosing a befitting assembler becomes a
+tough task. Here, we provide the information of adaptivity for
+each program, then above all, compare the performance of eight
+distinct tools against eight groups of simulated datasets from
+Solexa sequencing platform. Considering the computational time,
+maximum random access memory (RAM) occupancy, assembly accuracy
+and integrity, our study indicate that string-based assemblers,
+overlap-layout-consensus (OLC) assemblers are well-suited for
+very short reads and longer reads of small genomes respectively.
+For large datasets of more than hundred millions of short reads,
+De Bruijn graph-based assemblers would be more appropriate. In
+terms of software implementation, string-based assemblers are
+superior to graph-based ones, of which SOAPdenovo is complex for
+the creation of  configuration file. Our comparison study will
+assist researchers in selecting a well-suited assembler and offer
+essential information for the improvement of existing assemblers
+or the developing of novel assemblers.}
+}
