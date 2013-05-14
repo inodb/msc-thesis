@@ -591,11 +591,11 @@ different assembly strategies.
 
 
 % One page figure over length distributions roc style
-\onepagecmp{chris-mock-length-distribution-roc}{A comparison of assembly
+\onepagecmp{chris-mock-length-distribution}{A comparison of assembly
 strategies on length distributions. Contigs ordered by numbering from longest
 to shortest.}
 
-\onepagecmp{chris-mock-length-distribution-cov-roc}{A comparison of assembly
+\onepagecmp{chris-mock-length-distribution-cov}{A comparison of assembly
 strategies on metagenome coverage. Contigs ordered by numbering from longest to
 shortest.}
 
@@ -641,81 +641,8 @@ compared to the other assembly stategies is in large part a result of losing
 many short contigs.\\
 
 
-
-% Purity
-\clearpage
-\newgeometry{top=0.1cm,left=0.1cm,right=0.1cm,bottom=0.1cm}
-\begin{figure}[p]
-\centering
-\thispagestyle{empty}
-%\vspace{-2cm}
-\begin{minipage}{\textwidth}
-    \hspace*{0.16\textwidth}
-    \centering
-    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/even.png}}
-    \hspace*{0.25\textwidth}
-    \centering
-    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/uneven.png}}
-\end{minipage}
-\begin{minipage}{\textwidth}
-    \centering
-    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig.png}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/contig/l50_vs_global_purity.png}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig/l50_vs_global_purity.png}}
-\end{minipage}
-\begin{minipage}{\textwidth}
-    \centering
-    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig-merge.png}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/contig-merge/l50_vs_global_purity.png}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig-merge/l50_vs_global_purity.png}}
-\end{minipage}
-\begin{minipage}{\textwidth}
-    \centering
-    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/scaf.png}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/scaf/l50_vs_global_purity.png}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/scaf/l50_vs_global_purity.png}}
-\end{minipage}
-\begin{minipage}{\textwidth}
-    \centering
-    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig-scaf.png}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/contig-scaf/l50_vs_global_purity.png}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig-scaf/l50_vs_global_purity.png}}
-\end{minipage}
-\begin{minipage}{\textwidth}
-    \centering
-    \raisebox{-0.5\height}{\includegraphics[width=0.10\textwidth]{figures/logos/contig-merge-scaf.png}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_even/contig-merge-scaf/l50_vs_global_purity.png}}
-    \hspace*{0.01\textwidth}
-    \raisebox{-0.5\height}{\includegraphics[height=0.25\textwidth]{figures/masmvali/Project_ID793_dAmore/Sample_50ng_unbalanced/contig-merge-scaf/l50_vs_global_purity.png}}
-\end{minipage}
-\caption{Global purity as a function of L50. Compared over all assembly
-strategies.}
-\end{figure}
-\clearpage
-\restoregeometry
-
-%\begin{figure}[ht!]
-%  \centering
-%    \includegraphics[width=\textwidth]{figures/l50-purity-50ng_even.pdf}
-%  \caption{L50 versus Purity for 50ng even library. The Velvet assemblies have filled points while the Meta-Velvet assemblies have unfilled points.}
-%  \label{fig:l50purity50ng_even}
-%\end{figure}
-%\begin{figure}[ht!]
-%  \centering
-%    \includegraphics[width=\textwidth]{figures/l50-purity-50ng_unbalanced.pdf}
-%  \caption{L50 versus Purity for 50ng uneven library. The Velvet assemblies have filled points while the Meta-Velvet assemblies have unfilled points.}
-%  \label{fig:l50purity50ng_uneven}
-%\end{figure}
-
+\onepagecmp{chris-mock-purity-l50-asm-stats}{A comparison of assembly
+strategies on purity.}
 
 \chapter{Discussion}
 It is difficult to name one true winner. Depending on the post-processing and
