@@ -46,7 +46,7 @@ related strains often occur in the same environment this is a challenge. Also,
 it is difficult to determine whether the formation of a chimera is natural due
 to homologous recombination or an error in the assembly process
 \cite{Tyson14961025}. Another problem with assembly is variations in gene
-content among closely related strains, since a gene inserted in a subpopulaton
+content among closely related strains, since a gene inserted in a subpopulation
 will cause conflicting assembly results \cite{Hallam17114289}. After assembling
 the reads, a process called binning is performed, where the resulting scaffolds
 and contigs are assigned to phylogenetically related groups. Finally, gene
@@ -60,11 +60,11 @@ Illumina, Sanger and 454 on cost of sequencing and resulting coverage of
 microbial communities, Illumina short read libraries were shown to be the best
 for communities of medium complexity \cite{Mende22384016}. Therefore we have
 chosen to assess the assembly strategies for Illumina paired short reads
-sepecifically.  In previous studies mostly {\em in silico} metagenomic data
+specifically.  In previous studies mostly {\em in silico} metagenomic data
 sets have been used \cite{Pignatelli21625384,Mavromatis17468765}. In contrast
 the community of our study is an {\em in vitro} simulated metagenome consisting
 of 59 species with completed or nearly completed genomes so the quality of our
-assesment is not dependent on the realisticness of read simulators. An even and
+assessment is not dependent on the realisticness of read simulators. An even and
 uneven distribution of the 59 species were created in vitro. The community has
 been sequenced with different type of library preparations to be able to test
 the difference in library preparation as well.  The following assembly programs
@@ -90,42 +90,47 @@ dominating population with several low-abundance ones, the medium more than one
 dominating population and the complex community had no dominating population at
 all. Resulting contigs were evaluated on chimericity and length distribution.
 Compared to using the original reads for gene annotation, assembly was
-demonstrated to give up to 20\% increase in accurate gene prediction
-and a slightly better increase for inaccurate and missed genes. Sanger reads of
-700 bp were used. This approach of using artificial communities has
-subsequently been used in adapted versions by several other assembly evaluation
-papers \cite{Pignatelli21625384,Mende22384016}. In the benchmark by
-\citet{Pignatelli21625384} the reads of the artificial communities were changed
-from Sanger to 454 and Illumina. For the Illumina reads, SSAKE
+demonstrated to give up to 20\% increase in accurate gene prediction. An
+accurate gene prediction was defined as a predicted gene that was also
+annotated in the original genome. Missing genes and inaccurately predicted
+genes decreased with slightly more than 20\% after assembly. The approach of
+using artificial communities has subsequently been used in adapted versions by
+several other assembly evaluation papers
+\cite{Pignatelli21625384,Mende22384016}. In those cases simulated reads were
+used that imitated the then-current most used sequencing methods. In the
+benchmark by \citet{Pignatelli21625384} the reads of the artificial communities
+were changed from Sanger to 454 and Illumina. For the Illumina reads, SSAKE
 \cite{Warren17158514} and Velvet were used to perform the assembly. No
 difference in chimericity between using the simulated 454 reads or the Illumina
 reads was spotted. The main cause of chimericity was sequence similarity of the
 organisms, no relation with genome coverage was found. At the functional level
-metagenomic assembly turned out to be counterproductive compared to using the
-original reads for annotation. \citet{Mende22384016} used a metagenome of 10,
-100 and 400 species with simulated reads of Illumina, 454 and Sanger where the
-number of reads for each technology was based on sequencing cost. The
-sequencing cost was kept constant. All of the technologies provided similar
+metagenomic assembly turned out to be counterproductive or equally good as using the
+original 454 reads for annotation. For the Illumina reads the assembly did
+improve the functional annotation. \citet{Mende22384016} used a metagenome of
+10, 100 and 400 species with simulated reads of Illumina, 454 and Sanger where
+the number of reads for each technology was based on sequencing cost. The
+sequencing cost was kept constant.  All of the technologies provided similar
 coverage for 10 species. Illumina was superior for 100 species due to the
 higher coverage one can get for a similar price.  Sanger performed best for 400
-species because of longer read length. Sanger reads were assembled with
+species because of longer read length.  Sanger reads were assembled with
 Arachne; 454 reads with Celera \cite{Myers10731133} and Illumina reads with
-SOAPdenovo \cite{Li20019144}. Similar to the study of
+SOAPdenovo \cite{Li20019144}. In contrast to the study of
 \citet{Pignatelli21625384} a year earlier, the authors concluded that assembly
-contigs improves functional annotation of the metagenome. Furthermore using
-Illumina paired end data to determine contig links and construct scaffolds,
-although introducing more chimerism, resulted in an even better functional
-annotation.  Beyond using simulated reads or real reads of {\em in silico}
-communities there has not been a comparison of assembly algorithms using an
-{\em in vitro} community yet.  In vitro communities have been used previously
-with success to assess DNA extraction techniques for sequencing a low
-complexity community of nine bacterial genera \cite{Willner22514642}, an oral
-community of seven bacterial genomes \cite{Diaz22520388}, a human gut mock
-community of 10 bacterial genomes \cite{Wu20673359} and a human microbiome mock
-community of 21 bacterial genomes \cite{HMPC22699610}.  The advantage of using
-an {\em in vitro} community for assembly evaluation is that one does not have
-to rely on the correctness of sequencing simulators, the assessment can thus be
-as good as the similarity of the {\em in vitro } community to a real community.
+contigs improved functional annotation of the metagenome for all technologies.
+Furthermore using Illumina paired end data to determine contig links and
+construct scaffolds, although introducing more chimerism, resulted in an even
+better functional annotation.  Beyond using simulated reads or real reads of
+{\em in silico} communities there has not been a comparison of assembly
+algorithms using an {\em in vitro} community yet.  In vitro communities have
+been used previously with success to assess DNA extraction techniques for
+sequencing a low complexity community of nine bacterial genera
+\cite{Willner22514642}, an oral community of seven bacterial genomes
+\cite{Diaz22520388}, a human gut mock community of 10 bacterial genomes
+\cite{Wu20673359} and a human microbiome mock community of 21 bacterial genomes
+\cite{HMPC22699610}.  The advantage of using an {\em in vitro} community for
+assembly evaluation is that one does not have to rely on the correctness of
+sequencing simulators, the assessment can thus be as good as the similarity of
+the {\em in vitro } community to a real community.
 
 %Say something about GAGE and Assemblathon
 
@@ -141,17 +146,17 @@ ideas.
 archaeal species with finished or nearly completed genomes (Table
 \ref{tab:mock}). The species have been chosen such that there are a number of
 closely related organisms and more distant ones. The number of species is about
-equal to the number of species one would find in the human gut. The abundances
-of DNA from each species have been fixed in two types of configurations before
-sequencing. In the first configuration, the even configuration, all species
-have approximately equal genome copy numbers. In the second configuration, the
-uneven configuration, the phyla are mixed in proportions similar to log-normal
-distributions of phyla in soil \cite{Doroghazi18682841}. The samples have been
-prepared with the Nextera 50ng sample preparation kit. The entire reference
-metagenome's size is about 195Mb. Mock community preparations and sequencing
-were performed by our collaborators, Christopher Quince at University of
-Glasgow and Linda D'Amore and Neil Hall at Liverpool's Centre for Genomics
-Research.
+equal to the number of species one would find in the human gut of an individual
+\cite{Qin20203603}. The abundances of DNA from each species have been fixed in
+two types of configurations before sequencing. In the first configuration, the
+even configuration, all species have approximately equal genome copy numbers.
+In the second configuration, the uneven configuration, the phyla are mixed in
+proportions similar to log-normal distributions of phyla in soil
+\cite{Doroghazi18682841}. The samples have been prepared with the Nextera 50ng
+sample preparation kit. The entire reference metagenome's size is about 195Mb.
+Mock community preparations and sequencing were performed by our collaborators,
+Christopher Quince at University of Glasgow and Linda D'Amore and Neil Hall at
+Liverpool's Centre for Genomics Research.
 
 % The V3 (192 bp) and V4 (291 bp) of the 16S genes have been amplified and the samples have been sequenced with Illumina.
 
@@ -215,7 +220,7 @@ of each genome
 should have a distinct coverage peak due to the genome copy number of the
 corresponding genome being different from the other genomes in the metagenome. Meta-Velvet
 makes use of that property. Ray looks for 'seeds' in the graph and extends
-those seeds iteratively weighting choises by the number of reads supporting a
+those seeds iteratively weighting choices by the number of reads supporting a
 certain path. The seeds are unitigs in the graph with a specific coverage. The
 metagenomic update to Ray changes the seed selection by looking at the coverage
 peak in the graph locally instead of globally. 
@@ -400,7 +405,7 @@ GNU make. GNU make was chosen for a number of reasons:
 One of the biggest problems in metagenomic assembly are the
 computational demands \cite{Zhang21423806}. The size of the reads
 and the number of reads as well as the complexity and the structure of the
-sequenced community affect the computational demands. Therefore it is diffcult
+sequenced community affect the computational demands. Therefore it is difficult
 to determine the resource usage in advance. In our benchmark several strategies
 consist of parts with different computational requirements. Ray for instance
 runs over multiple nodes whereas merging with Newbler or Minimus2
@@ -446,7 +451,7 @@ following libraries:
 
 \item[50ng even]
 
-    \includegraphics[width=0.1\textwidth]{figures/logos/even.png}
+    \includegraphics[width=0.1\textwidth]{figures/logos/even.pdf}
 
     Community prepared with 50 ng Nextera library prepartion kit and equal
 genome copy numbers. The library has been sequenced with Illumina and contains
@@ -456,14 +461,12 @@ $\sim$10M paired reads, each single read has a length of 100.
 
 \item[50ng uneven]
 
-    \includegraphics[width=0.1\textwidth]{figures/logos/uneven.png}
+    \includegraphics[width=0.1\textwidth]{figures/logos/uneven.pdf}
     
-    Community prepared with 50 ng Nextera library prepartion kit
+    Community prepared with 50 ng Nextera library preparation kit
 and phyla mixed similar to log-normal distributions of phyla in soil. The
 library has been sequenced with Illumina and contains $\sim$10M paired reads,
 each single read has a length of 100.
-%\item[500pg uneven] Community prepared with 500 pg Nextera library prepartion kit and phyla
-%mixed similar to log-normal distributions of phyla in soil.
 \end{description}
 
 The original reads of each library were mapped against the reference genome
@@ -477,52 +480,46 @@ coverage over all bases is 3.\\
 
 \begin{figure}[ht!]
   \centering
-    \includegraphics[width=0.1\textwidth]{figures/logos/even.png}\\
+    \includegraphics[width=0.1\textwidth]{figures/logos/even.pdf}\\
   \centering
-      \includegraphics[width=0.8\textwidth,trim=35 20 35 33, clip]{figures/notebooks/chris-mock-even-distribution.png}
+      \includegraphics[width=0.65\textwidth,trim=35 20 35 33, clip]{figures/notebooks/chris-mock-even-distribution.png}
   \caption{Read mean coverage of 50ng even per genome. Median coverage over all
   bases is 10.}
   \label{fig:coverage50ngeven}
 \end{figure}
 \begin{figure}[ht!]
   \centering
-    \includegraphics[width=0.1\textwidth]{figures/logos/uneven.png}\\
+    \includegraphics[width=0.1\textwidth]{figures/logos/uneven.pdf}\\
   \centering
-    \includegraphics[width=0.8\textwidth,trim=35 20 35 33, clip]{figures/notebooks/chris-mock-uneven-distribution.png}
+    \includegraphics[width=0.65\textwidth,trim=35 20 35 33, clip]{figures/notebooks/chris-mock-uneven-distribution.png}
   \caption{Read mean coverage of 50ng uneven per genome. Median coverage over
   all bases is 3.}
   \label{fig:coverage50nguneven}
 \end{figure}
 
+\clearpage
 
 \section{Length distribution}
 \label{res:len}
-%\begin{figure}[ht!]
-%  \centering
-%    \includegraphics[width=0.1\textwidth]{figures/logos/even.png}
-%    \includegraphics[width=0.1\textwidth]{figures/logos/contig.png}\\
-%  \centering
-%    \includegraphics[width=0.8\textwidth,trim=35 20 35 33, clip]{figures/notebooks/chris-mock-length-distribution/even-contig.pdf}
-%  \caption{Length distribution comparison of different contiging strategies.
-%      Sum of bases shown as a function of contig length, x-axis is log-scaled
-%      and inverted. }
-%  \label{fig:length-distribution-even-contig-length}
-%\end{figure}
 
 In Figure \ref{fig:chris-mock-length-distribution} all assembly strategies are
-compared over length distributions. The dots indicate L50 values on the x-axis.
-For each assembly strategy the assembly with a kmer that resulted in the
-highest L50 has been chosen. As an example, for the contiging strategies on the reads from the
-even library (top left in Figure \ref{fig:chris-mock-length-distribution}),
-the assembly with the highest L50 value was for {\em velvetnoscaf} and {\em metavelvetnoscaf} $k=25$ and for Ray $k=21$.
-In this case Meta-Velvet scores the highest on L50, but not only by combining contigs that are not
-combined by Velvet. It actually also removes a lot of short contigs from the
-original Velvet assembly, resulting in a lower total sum of bases. Depending on
-what size of contigs are required for the post post-processing the winner
-differs. Longer than 100, Velvet and to a lesser extent Ray give more total
-bases, but longer than 1000 Meta-Velvet would seem a better candidate. When
-comparing length distributions between different assemblers, only looking at
-L50 is thus not enough.\\
+compared over length distributions. The x-axis indicates the threshold of
+contig length used in calculating the sum of bases on the y-axis. The x-axis is
+logarithmically scaled and reversed in order to give a better indication of
+what the longer contigs contribute to the sum. The dots indicate L50 values on
+the x-axis.  For each assembly strategy the assembly with a kmer that resulted
+in the highest L50 has been chosen. As an example, for the contiging strategies
+on the reads from the even library (top left in Figure
+\ref{fig:chris-mock-length-distribution}), the assembly with the highest L50
+value was for {\em velvetnoscaf} and {\em metavelvetnoscaf} $k=25$ and for Ray
+$k=21$.  In this case Meta-Velvet scores the highest on L50, but not only by
+combining contigs that are not combined by Velvet. It actually also removes a
+lot of short contigs from the original Velvet assembly, resulting in a lower
+total sum of bases. Depending on what size of contigs are required for the post
+post-processing the winner differs. Longer than 100, Velvet and to a lesser
+extent Ray give more total bases, but longer than 1000 Meta-Velvet would seem a
+better candidate. When comparing length distributions between different
+assemblers, only looking at L50 is thus not enough.\\
 
 In the first row that shows the contiging strategies, the uneven sample
 increases the gap in sum of bases between Meta-Velvet and the other assemblers
@@ -560,7 +557,7 @@ coverage by its own length could be due to:
 \item\label{en:dup} the mapping location is already partially or fully covered by another
 contig.
 \end{enumerate}
-Overal the plots look very similar to the original length distributions.  The
+Overall the plots look very similar to the original length distributions.  The
 increase in coverage is less smooth than the increase in length indicating that
 one or more of the three previously mentioned points occur, but not in an
 extreme fashion. In case no reference metagenome is available looking at the
@@ -620,7 +617,7 @@ contig lengths of Minimus2 compared to the metagenome coverage in Figure
 chimeric contigs.\\
 
 
-The internal scaffolding introduces a lot of unpure contigs. Notice also how
+The internal scaffolding introduces a lot of impure contigs. Notice also how
 Ray's internal scaffolder decreases in purity with decreasing $k$, whereas
 Velvet and Meta-Velvet have increased purity with decreasing $k$. At the lower
 values of $k$ the purity is very similar. Bambus2 results in very pure
@@ -654,75 +651,27 @@ Ideally one could get an insight for each type of community what assembly
 strategy is preferred. Making the analysis in this paper available as a web
 service allowing users to run it on their own assembly, library, mock community
 combination and comparing them to the existing ones, could lead to a form of
-crowdsourced benchmarking.\\
+crowd sourced benchmarking.\\
 
 
 The post-processing steps such as taxonomic classification and gene annotation
 have not been part of this study. It would be significant to know what size of
 contigs can be used in these post-processing steps and what purity level is
 required. Is there a balance between length increase and purity loss that is
-benificial for a certain type of post-processing?\\
+beneficial for a certain type of post-processing?\\
 
 
 Our efforts have focussed on validating assemblies when a reference is
 available. Apart from the length distribution plot that is a decent indication
 of metagenome coverage, no reference-less validation approaches have been
 suggested. Comparing our results versus a reference-less validation technique,
-such as Feature Response Curve \cite{Vezzi22319599} or ALE \cite{Clark23303509} would be a an
+such as Feature Response Curve \cite{Vezzi22319599} or ALE \cite{Clark23303509} would be an
 important addition, especially since metagenomics rose out of the problem that
 the vast majority of microbes cannot be cultured in the lab.
 
 
 %Low coverage libraries
 %Future work from presentation
-
-
-%\clearpage
-%\begin{landscape}
-%\begin{figure}[ht]
-%\noindent
-%\centering
-%\begin{minipage}{\textheight}
-%    \hspace*{0.21\textheight}
-%    \centering
-%    \raisebox{-0.5\height}{\includegraphics[width=0.1\textheight]{figures/logos/bambus2.png}}
-%    \hspace*{0.01\textheight}
-%    \centering
-%    \raisebox{-0.5\height}{\includegraphics[width=0.1\textheight]{figures/logos/bambus2.png}}
-%    \hspace*{0.01\textheight}
-%    \centering
-%    \raisebox{-0.5\height}{\includegraphics[width=0.1\textheight]{figures/logos/bambus2.png}}
-%    \hspace*{0.01\textheight}
-%    \centering
-%    \raisebox{-0.5\height}{\includegraphics[width=0.1\textheight]{figures/logos/bambus2.png}}
-%    \hspace*{0.01\textheight}
-%    \centering
-%    \raisebox{-0.5\height}{\includegraphics[width=0.1\textheight]{figures/logos/bambus2.png}}
-%    \hspace*{0.01\textheight}
-%\end{minipage}\\
-%\begin{minipage}{\textheight}
-%    \centering
-%    \raisebox{-0.5\height}{\includegraphics[width=0.2\textheight]{figures/logos/bambus2.png}}
-%    \hspace*{0.01\textheight}
-%    \centering
-%    \raisebox{-0.5\height}{\includegraphics[width=0.2\textheight]{figures/l50-purity-50ng_unbalanced.pdf}}
-%    \hspace*{0.01\textheight}
-%    \centering
-%    \raisebox{-0.5\height}{\includegraphics[width=0.2\textheight]{figures/l50-purity-50ng_unbalanced.pdf}}
-%    \hspace*{0.01\textheight}
-%    \centering
-%    \raisebox{-0.5\height}{\includegraphics[width=0.2\textheight]{figures/l50-purity-50ng_unbalanced.pdf}}
-%    \hspace*{0.01\textheight}
-%    \centering
-%    \raisebox{-0.5\height}{\includegraphics[width=0.2\textheight]{figures/l50-purity-50ng_unbalanced.pdf}}
-%    \hspace*{0.01\textheight}
-%    \centering
-%    \raisebox{-0.5\height}{\includegraphics[width=0.2\textheight]{figures/l50-purity-50ng_unbalanced.pdf}}
-%\end{minipage}
-%\caption{All that jazz}
-%\end{figure}
-%\end{landscape}
-%\clearpage
 
 \clearpage
 %\bibliographystyle{report.bst}
